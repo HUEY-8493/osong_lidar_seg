@@ -1,0 +1,23 @@
+services:
+  ros2_jazzy_lidar:
+    build:
+      context: .
+    image: guardianai/ros2-jazzy-lidar:latest
+    container_name: ros2_jazzy_lidar
+    network_mode: host
+    ipc: host
+    privileged: true
+    stdin_open: true
+    tty: true
+    environment:
+      - RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+      - CYCLONEDDS_URI=file:///root/ros2_ws/cyclonedds.xml
+      - LANG=C.UTF-8
+      - LC_ALL=C.UTF-8
+      - QT_X11_NO_MITSHM=1
+      - DISPLAY=${DISPLAY:-}
+    volumes:
+      - ${HOME}/ros2_jazzy_ws:/root/ros2_ws
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - ${HOME}/.Xauthority:/root/.Xauthority:ro
+    command: tail -f /dev/null

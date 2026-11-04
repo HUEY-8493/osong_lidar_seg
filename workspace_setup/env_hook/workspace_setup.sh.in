@@ -1,0 +1,14 @@
+# Sourced automatically by bash/zsh when workspace setup.bash is run
+export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+export CYCLONEDDS_URI="file://$AMENT_CURRENT_PREFIX/share/@PROJECT_NAME@/config/cyclonedds.xml"
+
+# Dynamic validation and status display (only for interactive shells)
+if [[ $- == *i* ]]; then
+    if [ -f "$AMENT_CURRENT_PREFIX/share/@PROJECT_NAME@/config/cyclonedds.xml" ]; then
+        echo -e "\e[1;32m[workspace_setup] CycloneDDS configuration active.\e[0m"
+        echo -e "\e[1;34m                  RMW_IMPLEMENTATION = $RMW_IMPLEMENTATION\e[0m"
+        echo -e "\e[1;34m                  CYCLONEDDS_URI     = $CYCLONEDDS_URI\e[0m"
+    else
+        echo -e "\e[1;31m[workspace_setup] Error: Configuration file not found at $CYCLONEDDS_URI\e[0m"
+    fi
+fi

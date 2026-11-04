@@ -1,0 +1,274 @@
+# Crane Slope Boundary + Constrained Region Growing Clustering Experimental Parameters
+# Can be loaded as params_overlay_file on top of cx128s2_bev_perception.yaml
+/cx128s2_bev_perception:
+  ros__parameters:
+    perception_mode: "crane_beam_work"
+    crane_pipeline: "slope"
+    target_frame: "world"
+    use_tf_transform: true
+    fallback_to_raw_frame: false
+    publish_debug_topics: true
+    publish_debug_valid_points: false
+    debug_cloud_max_points: 0
+    debug_cloud_publish_period_sec: 0.0
+
+    crane_slope:
+      # CX128S2 Optical & Grid Configuration
+      azimuth_columns: 666
+      lidar_channels: 128
+      lidar_model: "cx128s2"
+      cx128s2_prism_offset_deg: 0.0
+      cx128s2_prism_angles_deg: [0.0, -0.17, -0.34, -0.51]
+      model_angle_tolerance_deg: 0.25
+
+      # Slope Baseline Parameters
+      max_slope_degree: 10.0
+      max_vertical_height: 0.08
+      ground_z: 0.0
+      force_ground_below_z: -0.10
+      include_ground_in_clustering: false
+      horizontal_enabled: true
+      horizontal_max_azimuth_gap_deg: 0.5
+
+      # Debug Topic Outputs
+      publish_debug_clouds: true
+      publish_colored_cloud: true
+      publish_direction_clouds: true
+
+      # Slope Boundary + Constrained Region Growing Clustering
+      boundary_clustering:
+        enabled: true
+        slope_threshold_deg: 30.0          # Steep slope threshold [deg] for edge severing
+        height_step_threshold: 0.10        # Height discontinuity step [m]
+        range_jump_threshold: 0.25         # Range discontinuity jump [m]
+        max_neighbor_distance: 0.40        # Maximum Euclidean distance between adjacent grid points [m]
+        min_height_above_ground: 0.05      # Minimum clearance above ground_z for cluster points [m]
+        min_cluster_points: 15             # Minimum point count for a valid cluster
+        max_cluster_points: 10000          # Maximum point count
+        include_unknown: true              # Allow UNKNOWN points (aerial objects, crane hook/load)
+        enable_morphological_closing: true # 2D BEV morphological closing to bridge minor occlusion gaps
+        morph_closing_radius_m: 0.15       # Radius for BEV morphological closing [m]
+
+      # Z-Axis Gaussian Grouping + Existing BevConnectedComponentClusterer
+      z_gaussian_clustering:
+        enabled: true                      # Group candidate points along Z-axis using 1D Gaussian model before BEV clustering
+        sigma_z: 0.035                     # Base 1D Z Gaussian standard deviation [m] (tuned from 0.030m for layer split stabilization)
+        range_sigma_factor: 0.002          # Additional sigma_z per meter of horizontal range [m/m]
+        confidence_sigma_multiplier: 3.0   # Confidence band multiplier k (|z - mu_z| <= k * sigma_eff) (tuned from 2.5)
+        step_sigma_multiplier: 3.0         # Adjacent sorted Z jump multiplier
+        max_layer_z_spread: 0.35           # Maximum thickness of a single Z-Gaussian layer [m]
+        min_height_above_ground: 0.05      # Minimum height clearance above ground_z [m]
+        min_layer_points: 5                # Minimum points to keep a Z-Gaussian layer (protect sparse wire reflections)
+
+      # XY Closed Loop Containment Object Grouping + Subcluster Delta-Z Tracking
+      closed_loop_grouping:
+        enabled: false                     # Group subclusters inside XY closed loops (Omega_C) regardless of Z height gap
+        grid_resolution_m: 0.08            # 2D XY grid cell size for closed-loop detection [m]
+        closing_radius_m: 0.16             # Morphological closing radius to bridge minor loop perimeter gaps [m]
+        min_containment_ratio: 0.70        # Inside(K_i, Omega_C) cell overlap ratio threshold [0..1]
+        min_enclosed_cells: 4              # Minimum enclosed interior hole cells to form a valid closed loop
+        use_boundary_points_for_loop: false # Use all subcluster points (false) or boundary points only (true)
+        subcluster_match_xy_gate: 0.45     # Frame-to-frame XY centroid association gate [m]
+        subcluster_match_z_gate: 0.40      # Frame-to-frame Z centroid association gate [m]
+
+      # FSM State & ROI Pre-filtering Integration: P_s = {p_i in P | p_i in R_s}
+      roi_filter:
+        enabled: true                      # Pre-clustering ROI filtering
+        only_crane_roi: true               # Compute strictly inside Crane ROI (Beam ROI), ignoring state
+        active_include_background: false   # If true, retain Background ROI clustering alongside Crane ROI in active states
+        expand_beam_roi: false             # Keep clustering strictly inside Hook / Crane ROI
+
+      # Top-Down Hook Chain Connection Limits (Slope & Turn Angle Constraints)
+      top_down_hook:
+        max_slope_angle_deg: 35.0   # [deg] Absolute slope angle limit from vertical (0°=downward)
+        max_turn_angle_deg: 40.0    # [deg] Max turn angle change from previous edge
+
+      # Fixed Root ROI and Geometric Center Reference (Zero-Jitter Hook Chain Root)
+      fixed_root:
+        enabled: true
+        left_roi:
+          x_min: -1.25
+          x_max: -0.55
+          y_min: -0.25
+          y_max: 0.35
+          z_min: 4.95
+          z_max: 5.55
+        right_roi:
+          x_min: 0.72
+          x_max: 1.42
+          y_min: -0.25
+          y_max: 0.35
+          z_min: 5.00
+          z_max: 5.60
+        min_points: 15
+        hold_frames: 3
+        motion_speed_threshold: 0.12
+        motion_disp_threshold: 0.08
+        motion_confirm_frames: 3
+
+      # Top-Down Hook Chain Connection Line Stabilization (Orange <-> Blue Toggle Smoothing)
+      connection_stabilization:
+        enabled: true
+        history_frames: 10
+        min_direct_frames: 4
+        min_transition_count: 0
+        missing_hold_frames: 3
+        spatial_continuity_enabled: true
+        spatial_min_direct_frames: 1
+        spatial_max_gap_z: 0.80
+        spatial_max_dxy: 0.35
+
+      # Layer-wise Dual-ROI Anchoring & Motion Monitoring
+      dual_roi_anchor:
+        enabled: true
+        publish_markers: true
+        fixed_roi_size_xy: 0.36        # [m] Fixed Monitoring ROI XY span (36cm)
+        fixed_roi_size_z: 0.40         # [m] Fixed Monitoring ROI Z height (40cm)
+        moving_roi_size_xy: 0.60       # [m] Moving Monitoring ROI XY span (60cm)
+        moving_roi_size_z: 0.56        # [m] Moving Monitoring ROI Z height (56cm)
+        confirm_frames: 3              # Frames required to lock Fixed Anchor
+        min_direct_evidence_frames: 2  # Min direct observation frames
+        max_lock_slope_deg: 28.0       # Max slope angle [deg] for initial straightness check
+        max_lock_turn_deg: 30.0        # Max turn angle [deg] for initial straightness check
+        noise_deadband_xy: 0.06        # [m] Stationary XY jitter deadband (6cm)
+        noise_deadband_z: 0.08         # [m] Stationary Z jitter deadband (8cm)
+        relocate_thresh_xy: 0.10       # [m] Genuine displacement threshold for relocation
+        relocate_thresh_z: 0.12        # [m] Genuine Z displacement threshold for relocation
+        relocate_confirm_frames: 3     # Consecutive frames to confirm relocation
+        anchor_memory_frames: 30       # Memory frames for return-to-anchor recovery
+        beam_intrusion_guard_enabled: true
+        beam_min_length_m: 0.80        # [m] Min length to identify cargo beam intrusion
+        beam_min_aspect_ratio: 2.2     # Min aspect ratio for beam classification
+        intrusion_hold_frames: 50      # Frames to hold wire anchor during beam occlusion
+
+      # Z-axis Temporal Median Filter (Window = 3)
+      z_temporal_median:
+        enabled: true
+        window_frames: 3
+
+      # Virtual Rope Centerline & 2-Strand Wire Bundle
+      virtual_rope:
+        enabled: true
+        wire_min_spacing_m: 0.10       # [m] Min separation to qualify as 2 distinct strands
+        wire_max_spacing_m: 0.45       # [m] Max separation to belong to same wire bundle
+        wire_merge_span_m: 0.16        # [m] Span threshold below which strands are considered overlapped
+        memory_frames: 30              # Frames to remember 2-strand relative spacing and orientation
+        publish_markers: true          # Visualize Virtual Rope Centerline in RViz
+
+      # Lower Sheave (도르래 바퀴/회전축) Detection & Virtual Rope Termination
+      sheave:
+        # Reviewed observation library: immutable online; source center is metadata only.
+        # One USER_SEEDED condition (~2.50m). Old candidates remain PROBABLE, not same-object truth.
+        reference_matching_enabled: true
+        debug_seed_world: [-0.903, 0.380, 4.210] # Marker only, never a detection position prior.
+        # Preserve the verified eight-reference bank; no retraining.
+        reference_ids: ["oct05_user_left_f000", "raw_left_probable_f000", "raw_right_probable_f000", "oct07_user_right_f0000", "oct07_user_right_f3000", "oct06_user_left_f000", "oct05_user_right_f002", "oct07_user_negative_surface_f2246"]
+        reference_sources: ["rosbag2_2026_10_05-12_31_52; frame=0; manual Raw surface crop; physical dimensions/axis UNKNOWN", "raw_mcap; frame=0; manual Raw surface crop; physical dimensions/axis UNKNOWN", "raw_mcap; frame=0; manual Raw surface crop; physical dimensions/axis UNKNOWN", "rosbag2_2026_10_07-01_56_19; Raw manual selected frame; user-confirmed RIGHT object; manual curved-shell crop; not tracker labels; physical axis UNKNOWN", "rosbag2_2026_10_07-01_56_19; Raw manual selected frame; user-confirmed RIGHT object; manual curved-shell crop; not tracker labels; physical axis UNKNOWN", "rosbag2_2026_10_06-01_54_08; frame=0; Raw surface A explicitly confirmed Housing by user after viewing oct06_left_confirmation.png; physical axis UNKNOWN", "rosbag2_2026_10_05-12_31_52; frame=2; RIGHT B explicitly confirmed by user; manually cropped Raw shell excluding upper wire/lower Hook; physical axis UNKNOWN", "Oct07 LEFT: user-confirmed no visible Housing entire bag; hard negative Raw surface mined from rejected false-positive extent at frame2246; not a Housing; held-out negative test is within-bag development, not blind"]
+        reference_labels: ["USER_SEEDED", "PROBABLE", "PROBABLE", "USER_SEEDED", "USER_SEEDED", "USER_SEEDED", "USER_SEEDED", "NEGATIVE"]
+        reference_families: [1, 101, 102, 107, 107, 106, 105, -1]
+        reference_features: [
+          0.4582310914993286, 0.20580777525901794, 0.45392489433288574, 0.6198497723828207, 0.2839169244426638, 0.09623330317451552, 0.0317735413056037, 0.2362796071634893, 0.731946851530907, 0.09878682842287695, 0.3974581166955517, 0.5037550548815714, 2.50311949673788, 1731.0, 2187.0900779069143, -0.3463231332724943, 0.10760176106039143, 0.02803785725179786, -0.882886302085504, 0.06603675814284904, 4.296962142748202, 1.0, -0.35271451871317083, 0.026381791118745675, -0.935359005615653, 0.0, 1791203512.871687, 1.0,
+          0.4407225251197815, 0.20140965282917023, 0.42072367668151855, 0.6668580127862619, 0.25040660202320736, 0.08273538519053072, 0.0723917672107878, 0.5621007806955287, 0.36550745209368346, 0.1923349893541519, 0.38041163946061035, 0.42725337118523776, 3.0614135261014677, 1409.0, 1962.8003042622706, -0.24813991137816593, 0.17258376530335262, 0.009552997862556811, -0.9081088290136702, 0.06823447109111035, 3.7154470021374433, 0.5, -0.29663060606440805, 0.02228853460371999, -0.9547321638926181, 0.0, 1.0, 1.0,
+          0.4298737049102783, 0.27512040734291077, 0.5297842025756836, 0.4981773856270517, 0.4423342571756037, 0.059488357197344674, 0.09719222462203024, 0.3563714902807775, 0.5464362850971922, 0.40532757379409645, 0.4240460763138949, 0.17062634989200864, 2.3601844803763914, 2778.0, 2824.5382007210806, -0.3389268953050104, 0.19085730727067318, 0.0959195059095892, 1.0575791615603896, 0.05753283694685189, 4.529080494090411, 0.5, 0.4480917859341508, 0.024376421051526466, -0.8936551580308044, 0.0, 1.0, 1.0,
+          0.39635479340055035, 0.2026908877695242, 0.21761420807639098, 0.6964613795826692, 0.1734184441570274, 0.13012017626030345, 0.15422885572139303, 0.277363184079602, 0.568407960199005, 0.47512437810945274, 0.3383084577114428, 0.1865671641791045, 3.754496382458828, 804.0, 1907.9408437861116, -0.13762033032403576, 0.07999387775235522, 0.05682809767547736, 0.9917289246620187, 0.08693842760216976, 3.018171902324523, 1.0, 0.2641443281968308, 0.023155816052546994, -0.9642051555889886, 0.0, 1791338179.1519396, 1.0,
+          0.32703503072154416, 0.2104995513990727, 0.24699529514498986, 0.639449086131713, 0.27084617897832736, 0.0897047348899595, 0.1769578313253012, 0.24548192771084337, 0.5775602409638554, 0.4126506024096386, 0.338855421686747, 0.24849397590361447, 3.129317843310232, 1328.0, 3293.4998412449363, -0.1576301508558844, 0.08936514428910547, 0.054577430152900064, 1.2515870429597882, 0.03965971820604585, 3.7704225698471, 1.0, 0.39995523166027885, 0.012673598589810646, -0.9164470484247069, 3000.0, 1791338479.1537948, 1.0,
+          0.3794258685313009, 0.3310472672572126, 0.30167402760644, 0.5722282907404769, 0.2989562019443291, 0.12881550731519406, 0.12138728323699421, 0.22157996146435452, 0.6570327552986512, 0.2813102119460501, 0.4277456647398844, 0.2909441233140655, 5.363182782532236, 519.0, 763.3718270228609, -0.20435609349732586, 0.09731793410911416, 0.06885841313478247, -0.9199090992462496, 0.1286303294325239, 1.3561415868652176, 1.0, -0.171522981137688, 0.023983954052707274, -0.9848881342008533, 0.0, 1791251649.1928332, 1.0,
+          0.4067057492562106, 0.2576779433878379, 0.6080905179513687, 0.6383542358074128, 0.3209042795110945, 0.0407414846814926, 0.11758055398530243, 0.3937252685132843, 0.48869417750141325, 0.35387224420576596, 0.4412097230073488, 0.20491803278688525, 1.7531112230423314, 3538.0, 3476.777256763018, -0.3832482504151873, 0.22484226753618142, 0.15995386965081515, 1.0226375912255476, 0.04501272845617083, 5.215046130349185, 1.0, 0.583327274267786, 0.02567591141083234, -0.811831287071728, 2.0, 1791203513.0717697, 1.0,
+          0.5142175524884779, 0.2173810747655428, 0.6495407400669255, 0.6556634790959655, 0.32215357617210705, 0.022182944731927483, 0.152, 0.2344, 0.6136, 0.3528, 0.4304, 0.2168, 4.274276086550621, 1250.0, 1064.764463756403, -0.4238845199134178, 0.22565622015350773, 0.13707053432976712, -0.7817791898621985, 0.12385765059334096, 2.437929465670233, 1.0, -0.18290329731440003, 0.028977456786909425, -0.9827037655517981, 2246.0, 1791338403.7492852, 1.0
+        ]
+        reference_local_features: [
+          0.4872304099036152, 0.5054687553810591, 0.26970822969675357, 0.14673599075678798, 0.0803004043905257, 0.0, 0.05488157134604275, 0.029462738301559793, 0.0011554015020219526, 0.005199306759098787, 0.014442518775274409, 0.0, 0.2507221259387637, 0.11438474870017332, 0.0017331022530329288, 0.0635470826112074, 0.0005777007510109763, 0.006932409012131715, 0.004043905257076834, 0.006354708261120739, 0.0, 0.07741190063547082, 0.047949162333911034, 0.0, 0.06181398035817447, 0.02772963604852686, 0.002310803004043905, 0.0005777007510109763, 0.0017331022530329288, 0.0,
+          0.4626613678863166, 0.4733151991869656, 0.21224954469517182, 0.008516678495386799, 0.0106458481192335, 0.0007097232079489, 0.1653655074520937, 0.08161816891412349, 0.0106458481192335, 0.0667139815471966, 0.047551454932576294, 0.0, 0.0127750177430802, 0.0063875088715401, 0.0, 0.2100780695528744, 0.0262597586941093, 0.007806955287437899, 0.0688431511710433, 0.061745919091554295, 0.0042583392476933995, 0.0042583392476933995, 0.0035486160397444995, 0.0, 0.0858765081618169, 0.0801987224982257, 0.0035486160397444995, 0.0198722498225692, 0.0127750177430802, 0.0,
+          0.5675473018713384, 0.5089950999599842, 0.24347054064165877, 0.01907847372210223, 0.010439164866810655, 0.0014398848092152627, 0.051115910727141826, 0.017638588912886968, 0.0003599712023038157, 0.01079913606911447, 0.0064794816414686825, 0.0, 0.18718502519798416, 0.07271418286537078, 0.0017998560115190785, 0.11663066954643629, 0.0, 0.0003599712023038157, 0.0709143268538517, 0.0032397408207343412, 0.0003599712023038157, 0.07955363570914327, 0.03995680345572354, 0.0, 0.1857451403887689, 0.08999280057595392, 0.0007199424046076314, 0.01259899208063355, 0.019798416126709864, 0.0010799136069114472,
+          0.3862800657133684, 0.22456974158079285, 0.24014413922966077, 0.006218905472636816, 0.008706467661691543, 0.0012437810945273632, 0.011194029850746268, 0.0708955223880597, 0.0708955223880597, 0.009950248756218905, 0.08208955223880597, 0.0037313432835820895, 0.017412935323383085, 0.0236318407960199, 0.0024875621890547263, 0.0, 0.0024875621890547263, 0.16169154228855723, 0.01616915422885572, 0.0472636815920398, 0.09701492537313433, 0.0, 0.041044776119402986, 0.012437810945273632, 0.017412935323383085, 0.08706467661691543, 0.06840796019900497, 0.013681592039800995, 0.10074626865671642, 0.026119402985074626,
+          0.3747096052986151, 0.3081478059975974, 0.2031495725274145, 0.0, 0.0391566265060241, 0.0, 0.061746987951807226, 0.029367469879518073, 0.0007530120481927711, 0.058734939759036146, 0.09864457831325302, 0.004518072289156626, 0.03237951807228916, 0.01882530120481928, 0.0, 0.05948795180722891, 0.0007530120481927711, 0.0007530120481927711, 0.16490963855421686, 0.0911144578313253, 0.009036144578313253, 0.006024096385542169, 0.0037650602409638554, 0.0, 0.10692771084337349, 0.060240963855421686, 0.016566265060240965, 0.06325301204819277, 0.07078313253012049, 0.002259036144578313,
+          0.3844782316240515, 0.3175065198647862, 0.239924261435478, 0.025048169556840076, 0.011560693641618497, 0.009633911368015413, 0.057803468208092484, 0.01348747591522158, 0.009633911368015413, 0.11175337186897881, 0.05202312138728324, 0.005780346820809248, 0.036608863198458574, 0.0, 0.0, 0.04431599229287091, 0.0, 0.005780346820809248, 0.18882466281310212, 0.15028901734104047, 0.007707129094412331, 0.02697495183044316, 0.0038535645472061657, 0.007707129094412331, 0.04816955684007707, 0.03468208092485549, 0.009633911368015413, 0.06936416184971098, 0.0674373795761079, 0.0019267822736030828,
+          0.6357985775319097, 0.4500886555026077, 0.20671463577603627, 0.016958733747880157, 0.023742227247032222, 0.0011305822498586771, 0.030525720746184284, 0.05087620124364047, 0.0, 0.0031091011871113624, 0.014980214810627474, 0.0, 0.10938383267382702, 0.0322215941209723, 0.0248728094968909, 0.11362351611079706, 0.02006783493499152, 0.0, 0.04522328999434709, 0.04013566986998304, 0.005087620124364048, 0.08083663086489543, 0.059920859242509894, 0.011871113623516111, 0.1582815149802148, 0.07857546636517806, 0.011871113623516111, 0.01950254381006218, 0.03900508762012436, 0.00819672131147541,
+          0.6951734622352881, 0.5619502835454977, 0.20670787291329612, 0.0, 0.0928, 0.04, 0.0, 0.152, 0.1696, 0.0048, 0.0928, 0.0672, 0.0032, 0.0304, 0.0264, 0.0, 0.0144, 0.1048, 0.0048, 0.0448, 0.0168, 0.0088, 0.0112, 0.0048, 0.0, 0.0304, 0.0424, 0.0024, 0.0312, 0.004
+        ]
+        enabled: true
+        min_radius_m: 0.08             # [m] Min plausible sheave radius (8cm)
+        max_radius_m: 0.28             # [m] Max plausible sheave radius (28cm)
+        default_radius_m: 0.155        # [m] Nominal sheave radius when partially observed (15.5cm)
+        min_arc_points: 12             # Min points along wheel contour for direct circle fit
+        max_circle_rms_m: 0.055        # [m] Max RMS error to accept direct circle fit (55mm)
+        max_sheave_width_m: 0.55       # [m] Max horizontal span to reject cargo beam
+        surface_gap_m: 0.08           # Connected broad surfaces across 4x4x3 cm voxel/layer splits
+        confirm_frames: 2              # Consecutive direct housing observations (axis remains UNKNOWN)
+        terminate_chain_at_sheave: true # Output only; requires independently observed, reliable axis
+        publish_markers: true          # Publish sheave cylinder, axis and center in RViz
+
+      # Default-enabled downstream work-cycle FSM and independent Raw boundary motion.
+      # Existing detectors, accumulation and Wire/Housing tracking are unaffected.
+      work_status:
+        enabled: false  # Existing legacy option retained.
+        virtual_hook_offset_z_m: 0.9  # User-selected trial; world Z-up, Housing tracked center minus offset.
+        fsm_enabled: true
+        boundary_motion_enabled: true
+        cargo_roi_width_x_m: 1.20
+        cargo_roi_width_y_m: 1.20
+        cargo_start_offset_m: 0.15  # 3 x existing 5cm occupancy cells
+        cargo_confirm_sec: 2.0
+        cargo_loss_sec: 1.3
+        lifting_event_hold_sec: 0.5
+        lifting_clearance_delta_m: 0.0  # 0: existing max(Z deadband, Z relocation)=0.12m
+        lifting_min_clearance_m: 0.0    # 0: existing max(Z deadband, placement tolerance)=0.08m
+        cargo_min_surface_width_m: 0.15
+        cargo_min_fill_ratio: 0.35  # Reject sparsely occupied rope/V outlines
+        boundary_search_radius_m: 0.60  # Existing hook connection margin
+        boundary_min_coherent_points: 4  # Independent majority of 8 patches
+
+      # Size-based 1st Exception Gate with FOV / Visibility Integration
+      exception_gate:
+        enabled: true
+        min_length_m: 0.80
+        min_area_m2: 0.15
+        use_visibility: true
+        max_occlusion_fraction: 0.40
+        scan_all_chain_nodes: true
+
+      # Pre-Z-Gaussian PointCloud Temporal Accumulation & Stabilization
+      temporal_stabilization:
+        enabled: true
+        mode: "sliding_window"      # "sliding_window" or "batch"
+        window_size: 5              # 5 or 10 frames
+        voxel_size_xy: 0.04         # [m]
+        voxel_size_z: 0.03          # [m]
+        min_hit_count: 2            # persistent observation threshold across window (transient noise rejection)
+        temporal_stabilization_enabled: true
+        stabilization_alpha: 0.20
+        jump_tolerance_length: 0.50 # [m]
+        jump_tolerance_width: 0.25  # [m]
+        jump_confirm_frames: 3
+        max_hold_missed_frames: 3
+        node_confirm_frames: 2
+        node_max_hold_frames: 2
+        largest_swap_confirm_frames: 3
+        largest_match_dist: 0.50
+        yaw_jump_tolerance_deg: 30.0
+        yaw_alpha: 0.15
+
+    # Crane ROI and Background ROI Bounds
+    crane_beam:
+      publish_background_roi_marker: false # Do not show yellow Background ROI box
+      beam_roi_x_min: -2.0
+      beam_roi_x_max: 2.0
+      beam_roi_y_min: -2.0
+      beam_roi_y_max: 2.0
+      beam_roi_z_min: -0.5
+      beam_roi_z_max: 7.5
+      background_roi_x_min: -8.0
+      background_roi_x_max: 8.0
+      background_roi_y_min: -8.0
+      background_roi_y_max: 8.0
+      background_roi_z_min: -0.5
+      background_roi_z_max: 7.5
+      hook:
+        roi_left_x_min: -1.40
+        roi_left_x_max: -0.60
+        roi_right_x_min: 0.60
+        roi_right_x_max: 1.40
+        roi_y_min: -0.50
+        roi_y_max: 0.50
+        roi_z_min: 1.2
+        roi_z_max: 6.2

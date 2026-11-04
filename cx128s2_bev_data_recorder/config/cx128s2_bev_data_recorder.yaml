@@ -1,0 +1,56 @@
+/cx128s2_bev_data_recorder:
+  ros__parameters:
+    # Raw data is retained independently of perception output.
+    raw_pointcloud_topic: "/ch/lslidar_point_cloud"
+    # Production interface from cx128s2_bev_perception; never use /debug/* here.
+    perception_frame_topic: "/recording/perception_frame"
+    output_directory: "cx128s2_dataset"
+
+    # General: use the existing observed-VEHICLE trigger, then record 10 seconds.
+    # Crane keeps its separately deployed 8009e8f settings unchanged.
+    # continuous/manual remain available for diagnostics.
+    record_mode: "detection_trigger"
+    recording_duration_sec: 10.0
+    trigger_lifecycle: ["TRACKED"]
+    # Only VEHICLE objects may start/extend an event or be highlighted in a preview.
+    # Raw PCD remains the complete sensor frame for dataset integrity.
+    trigger_classes: ["VEHICLE"]
+    trigger_min_objects: 1
+
+    # TRACKED_PREDICTED has observed=false in the production recording interface.
+    # It may be listed above for output filtering, but never starts/extends an event.
+    # No pre-buffer: the fixed 10 seconds begin after confirmed detection.
+    pre_buffer_sec: 0.0
+    pre_buffer_max_frames: 256
+    trigger_end_no_detection_sec: 2.0
+    post_buffer_sec: 5.0
+
+    save_raw_cloud: true
+    save_detected_cloud: true
+    save_annotations: true
+    record_raw_only_frames: true
+
+    # Exact source-cloud timestamp is the default primary key.  A nearest fallback
+    # is available only when explicitly requested.
+    timestamp_match_mode: "exact"
+    timestamp_tolerance_ms: 0.0
+    sync_wait_ms: 100.0
+    cache_size: 256
+    # Keep this >= pre_buffer_max_frames so a trigger flush has bounded headroom.
+    write_queue_size: 512
+
+    preview_enabled: true
+    # Exactly two derivative previews per detection event: first and last
+    # observed TRACKED frame.  No per-frame PNG output is performed.
+    preview_mode: "event_boundary"
+    preview_save_enter: true
+    preview_save_exit: true
+    preview_width: 1024
+    preview_height: 1024
+    # target_frame/world coordinates, not raw LiDAR coordinates.
+    preview_x_min: -150.0
+    preview_x_max: 120.0
+    preview_y_min: -80.0
+    preview_y_max: 80.0
+
+    minimum_free_disk_gb: 1.0

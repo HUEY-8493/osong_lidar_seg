@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro"
+       name="lidar_description">
+
+  <!-- Configurable Frame Arguments -->
+  <xacro:arg name="parent_frame" default="world"/>
+  <xacro:arg name="child_frame" default="laser_link"/>
+
+  <!-- Configurable Origin Arguments (in meters and radians) -->
+  <xacro:arg name="x" default="0.0"/>
+  <xacro:arg name="y" default="3.0"/>
+  <xacro:arg name="z" default="7.014126"/>
+
+  <xacro:arg name="roll" default="-2.287096604"/>
+  <xacro:arg name="pitch" default="0.950310530"/>
+  <xacro:arg name="yaw" default="-0.523598776"/>
+
+  <!-- Links -->
+  <link name="$(arg parent_frame)"/>
+  <link name="$(arg child_frame)"/>
+
+  <!-- Fixed Joint between Parent and Child Link -->
+  <joint name="$(arg parent_frame)_to_$(arg child_frame)" type="fixed">
+    <parent link="$(arg parent_frame)"/>
+    <child link="$(arg child_frame)"/>
+
+    <origin
+      xyz="$(arg x) $(arg y) $(arg z)"
+      rpy="$(arg roll) $(arg pitch) $(arg yaw)"/>
+  </joint>
+
+</robot>

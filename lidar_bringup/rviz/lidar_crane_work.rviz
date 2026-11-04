@@ -1,0 +1,259 @@
+Panels:
+- Class: rviz_common/Displays
+  Help Height: 70
+  Name: Displays
+  Property Tree Widget:
+    Expanded:
+    - /Global Options1
+    - /TF1
+    - /Raw Input Cloud1
+    - /Left Hook Body1
+    - /Right Hook Body1
+    - /Hook Markers & Centers1
+    - /Crane Beam Markers1
+    Splitter Ratio: 0.5
+  Tree Height: 240
+- Class: rviz_common/Views
+  Expanded:
+  - /Current View1
+  Name: Views
+  Splitter Ratio: 0.5
+Visualization Manager:
+  Class: ''
+  Displays:
+  - Alpha: 0.5
+    Cell Size: 1
+    Class: rviz_default_plugins/Grid
+    Color: 160; 160; 164
+    Enabled: true
+    Name: Grid
+    Normal Cell Count: 0
+    Offset:
+      X: 0
+      Y: 0
+      Z: 0
+    Plane: XY
+    Plane Cell Count: 10
+    Reference Frame: world
+    Value: true
+  - Class: rviz_default_plugins/TF
+    Enabled: false
+    Filter (blacklist): ''
+    Filter (whitelist): ''
+    Frame Timeout: 15
+    Frames:
+      All Enabled: true
+      laser_link:
+        Value: true
+      world:
+        Value: true
+    Marker Scale: 1
+    Name: TF
+    Show Arrows: true
+    Show Axes: true
+    Show Names: true
+    Tree:
+      world:
+        laser_link: {}
+    Update Interval: 0
+    Value: false
+  - Alpha: 0.18
+    Autocompute Value Bounds: true
+    Class: rviz_default_plugins/PointCloud2
+    Color: 150; 150; 150
+    Color Transformer: FlatColor
+    Decay Time: 0
+    Enabled: true
+    Name: Raw Input Cloud
+    Position Transformer: XYZ
+    Selectable: true
+    Size (Pixels): 1
+    Size (m): 0.02
+    Style: Points
+    Topic:
+      Depth: 5
+      Durability Policy: Volatile
+      History Policy: Keep Last
+      Reliability Policy: Best Effort
+      Value: /ch/lslidar_point_cloud
+    Use Fixed Frame: true
+    Use rainbow: true
+    Value: true
+  - Alpha: 1
+    Autocompute Value Bounds: true
+    Class: rviz_default_plugins/PointCloud2
+    Color: 30; 144; 255
+    Color Transformer: FlatColor
+    Decay Time: 0
+    Enabled: true
+    Name: Left Hook Body
+    Position Transformer: XYZ
+    Selectable: true
+    Size (Pixels): 5
+    Size (m): 0.04
+    Style: Points
+    Topic:
+      Depth: 5
+      Durability Policy: Volatile
+      History Policy: Keep Last
+      Reliability Policy: Reliable
+      Value: /crane_hook/left_body
+    Use Fixed Frame: true
+    Value: true
+  - Alpha: 1
+    Autocompute Value Bounds: true
+    Class: rviz_default_plugins/PointCloud2
+    Color: 46; 139; 87
+    Color Transformer: FlatColor
+    Decay Time: 0
+    Enabled: true
+    Name: Right Hook Body
+    Position Transformer: XYZ
+    Selectable: true
+    Size (Pixels): 5
+    Size (m): 0.04
+    Style: Points
+    Topic:
+      Depth: 5
+      Durability Policy: Volatile
+      History Policy: Keep Last
+      Reliability Policy: Reliable
+      Value: /crane_hook/right_body
+    Use Fixed Frame: true
+    Value: true
+  - Alpha: 0.85
+    Autocompute Value Bounds: true
+    Class: rviz_default_plugins/PointCloud2
+    Color: 255; 255; 255
+    Color Transformer: RGB8
+    Decay Time: 0
+    Enabled: false
+    Name: Hook ROI Clusters
+    Position Transformer: XYZ
+    Selectable: true
+    Size (Pixels): 4
+    Size (m): 0.03
+    Style: Points
+    Topic:
+      Depth: 5
+      Durability Policy: Volatile
+      History Policy: Keep Last
+      Reliability Policy: Reliable
+      Value: /crane_slope/clusters
+    Use Fixed Frame: true
+    Value: false
+  - Class: rviz_default_plugins/MarkerArray
+    Enabled: true
+    Name: Housing + Virtual Hook & Ready
+    Namespaces:
+      cargo_detection_roi: false
+      cargo_frozen_completion_boundary: false
+      cargo_tracking_roi: false
+      chain_direct_line: false
+      chain_gap_line: false
+      crane_move_patch_labels: false
+      crane_move_raw_patches: false
+      crane_work_fsm: false
+      fixed_root_roi: false
+      fsm_cargo: false
+      fsm_hook_observation: false
+      hook_info_text: false
+      hook_root: false
+      hook_terminal: false
+      housing_candidate_bbox: false
+      housing_candidate_points: false
+      housing_fixed_roi: false
+      housing_memory_status: false
+      housing_moving_roi: false
+      housing_observed_center: false
+      housing_tracked_center: false
+      housing_user_positive_seed: false
+      largest_connected_box: false
+      left_layer_fixed_anchor: false
+      left_layer_fixed_roi: false
+      left_layer_moving_center: false
+      left_layer_moving_roi: false
+      left_layer_offset_line: false
+      left_strand_a: false
+      left_strand_b: false
+      left_strand_tie: false
+      left_virtual_rope_centerline: false
+      original_virtual_rope: false
+      right_layer_fixed_anchor: false
+      right_layer_fixed_roi: false
+      right_layer_moving_center: false
+      right_layer_moving_roi: false
+      right_layer_offset_line: false
+      right_strand_a: false
+      right_strand_b: false
+      right_strand_tie: false
+      right_virtual_rope_centerline: false
+      crane_work_view: false
+      crane_hook_ready_view: true
+      crane_housing_view: true
+      crane_sling_view: true
+    Topic:
+      Depth: 5
+      Durability Policy: Volatile
+      History Policy: Keep Last
+      Reliability Policy: Reliable
+      Value: /crane_hook/markers
+    Value: true
+  - Class: rviz_default_plugins/MarkerArray
+    Enabled: false
+    Name: Original Crane Debug (optional)
+    Namespaces:
+      crane_work_view: false
+      crane_hook_ready_view: false
+      crane_housing_view: false
+      crane_sling_view: false
+    Topic:
+      Depth: 5
+      Durability Policy: Volatile
+      History Policy: Keep Last
+      Reliability Policy: Reliable
+      Value: /crane_hook/markers
+    Value: false
+  - Class: rviz_default_plugins/MarkerArray
+    Enabled: false
+    Name: Crane Beam Markers
+    Namespaces: {}
+    Topic:
+      Depth: 5
+      Durability Policy: Volatile
+      History Policy: Keep Last
+      Reliability Policy: Reliable
+      Value: /crane_beam/debug/markers
+    Value: false
+  Enabled: true
+  Global Options:
+    Background Color: 48; 48; 48
+    Fixed Frame: world
+    Frame Rate: 30
+  Name: root
+  Tools:
+  - Class: rviz_default_plugins/Interact
+    Hide Inactive Objects: true
+  - Class: rviz_default_plugins/MoveCamera
+  - Class: rviz_default_plugins/Select
+  - Class: rviz_default_plugins/FocusCamera
+  Transformation:
+    Current:
+      Class: rviz_default_plugins/TF
+  Value: true
+  Views:
+    Current View:
+      Class: rviz_default_plugins/Orbit
+      Distance: 9.0
+      Focal Point:
+        X: -0.5
+        Y: 0.3
+        Z: 4.0
+      Focal Shape Size: 0.05
+      Invert Z Axis: false
+      Name: Current View
+      Near Clip Distance: 0.01
+      Pitch: 0.25
+      Target Frame: world
+      Value: Orbit (rviz_default_plugins)
+      Yaw: 4.71

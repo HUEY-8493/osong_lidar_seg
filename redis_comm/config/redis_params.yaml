@@ -1,0 +1,10 @@
+/**:
+  ros__parameters:
+    host: "172.16.0.200"
+    port: 6379
+    password: "1qaz"
+    stream_name: "SP-OS-RW-R1"
+    poll_rate_hz: 1.0
+    max_fetch_count: 10
+    auto_reconnect: true
+

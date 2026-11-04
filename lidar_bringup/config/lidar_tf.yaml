@@ -1,0 +1,13 @@
+parent_frame: "world"
+child_frame: "laser_link"
+
+translation:
+  x: 0.0
+  y: 3.0
+  z: 7.014126
+
+rotation_rpy:
+  roll: -2.287096604
+  pitch: 0.950310530
+  yaw: -0.523598776
+  # yaw: 2.617993878

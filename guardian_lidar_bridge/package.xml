@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>guardian_lidar_bridge</name>
+  <version>0.1.0</version>
+  <description>Compact ROS-to-Guardian-Manager state bridge.</description>
+  <maintainer email="guardianai@example.invalid">GuardianAI</maintainer>
+  <license>Apache-2.0</license>
+  <buildtool_depend>ament_python</buildtool_depend>
+  <depend>rclpy</depend>
+  <depend>sensor_msgs</depend>
+  <depend>cx128s2_bev_perception</depend>
+  <exec_depend>python3-requests</exec_depend>
+  <test_depend>python3-pytest</test_depend>
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>

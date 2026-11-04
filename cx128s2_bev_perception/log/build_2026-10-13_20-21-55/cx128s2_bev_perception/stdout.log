@@ -1,0 +1,313 @@
+[  1%] Built target cx128s2_bev_perception__rs
+[  2%] Built target cx128s2_bev_perception__rosidl_generator_type_description
+[  3%] Built target test_raw_vehicle_box_refinement
+[  5%] Built target test_linear_kalman_filter
+[  8%] Built target visibility_model
+[  7%] Built target test_vehicle_status
+[ 10%] Built target test_vehicle_surface_tracking
+[ 12%] Built target crane_beam_detector
+[ 12%] Built target ament_cmake_python_symlink_cx128s2_bev_perception
+[ 12%] Built target cx128s2_bev_perception__cpp
+[ 14%] Built target test_crane_beam_detector
+[ 14%] Built target test_visibility_model
+[ 36%] Built target cx128s2_bev_perception__rosidl_generator_c
+[ 44%] Built target cx128s2_bev_perception__rosidl_typesupport_c
+[ 52%] Built target cx128s2_bev_perception__rosidl_typesupport_introspection_c
+[ 64%] Built target cx128s2_bev_perception__rosidl_typesupport_fastrtps_cpp
+[ 68%] Built target cx128s2_bev_perception__rosidl_typesupport_introspection_cpp
+[ 76%] Built target cx128s2_bev_perception__rosidl_typesupport_fastrtps_c
+[ 84%] Built target cx128s2_bev_perception__rosidl_typesupport_cpp
+[ 84%] Built target cx128s2_bev_perception
+[ 85%] Building CXX object CMakeFiles/cx128s2_bev_perception_node.dir/src/cx128s2_bev_perception_node.cpp.o
+[ 86%] Building CXX object CMakeFiles/test_tracking_policy.dir/test/test_tracking_policy.cpp.o
+[ 87%] Built target cx128s2_bev_perception__py
+[ 94%] Built target cx128s2_bev_perception__rosidl_generator_py
+[ 98%] Built target cx128s2_bev_perception_s__rosidl_typesupport_c
+[ 99%] Built target cx128s2_bev_perception_s__rosidl_typesupport_fastrtps_c
+[ 98%] Built target cx128s2_bev_perception_s__rosidl_typesupport_introspection_c
+running egg_info
+writing cx128s2_bev_perception.egg-info/PKG-INFO
+writing dependency_links to cx128s2_bev_perception.egg-info/dependency_links.txt
+writing top-level names to cx128s2_bev_perception.egg-info/top_level.txt
+reading manifest file 'cx128s2_bev_perception.egg-info/SOURCES.txt'
+writing manifest file 'cx128s2_bev_perception.egg-info/SOURCES.txt'
+[ 99%] Built target ament_cmake_python_build_cx128s2_bev_perception_egg
+[ 99%] Linking CXX executable cx128s2_bev_perception_node
+[ 99%] Built target cx128s2_bev_perception_node
+[100%] Linking CXX executable test_tracking_policy
+[100%] Built target test_tracking_policy
+-- Install configuration: "Release"
+-- Execute custom install script
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/ament_index/resource_index/rosidl_interfaces/cx128s2_bev_perception
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/msg/TrackedObject.json
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/msg/TrackedObjectArray.json
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/msg/RecordingObjectCluster.json
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/msg/PerceptionRecordingFrame.json
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/msg/CraneBeamStatus.json
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/msg/CraneBeamMotionDebug.json
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/srv/CommitShapeMemory.json
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/srv/ControlShapeMemory.json
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/srv/PrepareShapeMemoryCommit.json
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/crane_beam_motion_debug.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/crane_beam_status.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/crane_beam_motion_debug__functions.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/crane_beam_motion_debug__struct.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/crane_beam_motion_debug__type_support.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/crane_beam_status__functions.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/crane_beam_status__struct.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/crane_beam_status__type_support.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/perception_recording_frame__functions.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/perception_recording_frame__struct.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/perception_recording_frame__type_support.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/recording_object_cluster__functions.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/recording_object_cluster__struct.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/recording_object_cluster__type_support.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/tracked_object__functions.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/tracked_object__struct.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/tracked_object__type_support.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/tracked_object_array__functions.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/tracked_object_array__struct.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/tracked_object_array__type_support.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/perception_recording_frame.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/recording_object_cluster.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/rosidl_generator_c__visibility_control.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/tracked_object.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/tracked_object_array.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/srv/commit_shape_memory.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/srv/control_shape_memory.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/srv/detail/commit_shape_memory__functions.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/srv/detail/commit_shape_memory__struct.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/srv/detail/commit_shape_memory__type_support.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/srv/detail/control_shape_memory__functions.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/srv/detail/control_shape_memory__struct.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/srv/detail/control_shape_memory__type_support.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/srv/detail/prepare_shape_memory_commit__functions.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/srv/detail/prepare_shape_memory_commit__struct.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/srv/detail/prepare_shape_memory_commit__type_support.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/srv/prepare_shape_memory_commit.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/environment/library_path.sh
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/environment/library_path.dsv
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/crane_beam_motion_debug__rosidl_typesupport_fastrtps_c.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/crane_beam_status__rosidl_typesupport_fastrtps_c.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/perception_recording_frame__rosidl_typesupport_fastrtps_c.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/recording_object_cluster__rosidl_typesupport_fastrtps_c.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/tracked_object__rosidl_typesupport_fastrtps_c.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/tracked_object_array__rosidl_typesupport_fastrtps_c.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/rosidl_typesupport_fastrtps_c__visibility_control.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/srv/detail/commit_shape_memory__rosidl_typesupport_fastrtps_c.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/srv/detail/control_shape_memory__rosidl_typesupport_fastrtps_c.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/srv/detail/prepare_shape_memory_commit__rosidl_typesupport_fastrtps_c.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/crane_beam_motion_debug.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/crane_beam_status.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/crane_beam_motion_debug__builder.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/crane_beam_motion_debug__struct.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/crane_beam_motion_debug__traits.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/crane_beam_motion_debug__type_support.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/crane_beam_status__builder.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/crane_beam_status__struct.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/crane_beam_status__traits.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/crane_beam_status__type_support.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/perception_recording_frame__builder.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/perception_recording_frame__struct.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/perception_recording_frame__traits.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/perception_recording_frame__type_support.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/recording_object_cluster__builder.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/recording_object_cluster__struct.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/recording_object_cluster__traits.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/recording_object_cluster__type_support.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/tracked_object__builder.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/tracked_object__struct.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/tracked_object__traits.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/tracked_object__type_support.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/tracked_object_array__builder.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/tracked_object_array__struct.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/tracked_object_array__traits.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/tracked_object_array__type_support.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/perception_recording_frame.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/recording_object_cluster.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/rosidl_generator_cpp__visibility_control.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/tracked_object.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/tracked_object_array.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/srv/commit_shape_memory.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/srv/control_shape_memory.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/srv/detail/commit_shape_memory__builder.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/srv/detail/commit_shape_memory__struct.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/srv/detail/commit_shape_memory__traits.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/srv/detail/commit_shape_memory__type_support.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/srv/detail/control_shape_memory__builder.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/srv/detail/control_shape_memory__struct.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/srv/detail/control_shape_memory__traits.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/srv/detail/control_shape_memory__type_support.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/srv/detail/prepare_shape_memory_commit__builder.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/srv/detail/prepare_shape_memory_commit__struct.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/srv/detail/prepare_shape_memory_commit__traits.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/srv/detail/prepare_shape_memory_commit__type_support.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/srv/prepare_shape_memory_commit.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/crane_beam_motion_debug__rosidl_typesupport_fastrtps_cpp.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/crane_beam_status__rosidl_typesupport_fastrtps_cpp.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/perception_recording_frame__rosidl_typesupport_fastrtps_cpp.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/recording_object_cluster__rosidl_typesupport_fastrtps_cpp.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/tracked_object__rosidl_typesupport_fastrtps_cpp.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/tracked_object_array__rosidl_typesupport_fastrtps_cpp.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/srv/detail/commit_shape_memory__rosidl_typesupport_fastrtps_cpp.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/srv/detail/control_shape_memory__rosidl_typesupport_fastrtps_cpp.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/srv/detail/prepare_shape_memory_commit__rosidl_typesupport_fastrtps_cpp.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/crane_beam_motion_debug__rosidl_typesupport_introspection_c.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/crane_beam_status__rosidl_typesupport_introspection_c.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/perception_recording_frame__rosidl_typesupport_introspection_c.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/recording_object_cluster__rosidl_typesupport_introspection_c.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/tracked_object__rosidl_typesupport_introspection_c.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/tracked_object_array__rosidl_typesupport_introspection_c.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/rosidl_typesupport_introspection_c__visibility_control.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/srv/detail/commit_shape_memory__rosidl_typesupport_introspection_c.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/srv/detail/control_shape_memory__rosidl_typesupport_introspection_c.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/srv/detail/prepare_shape_memory_commit__rosidl_typesupport_introspection_c.h
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/crane_beam_motion_debug__rosidl_typesupport_introspection_cpp.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/crane_beam_status__rosidl_typesupport_introspection_cpp.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/perception_recording_frame__rosidl_typesupport_introspection_cpp.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/recording_object_cluster__rosidl_typesupport_introspection_cpp.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/tracked_object__rosidl_typesupport_introspection_cpp.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/msg/detail/tracked_object_array__rosidl_typesupport_introspection_cpp.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/srv/detail/commit_shape_memory__rosidl_typesupport_introspection_cpp.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/srv/detail/control_shape_memory__rosidl_typesupport_introspection_cpp.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/cx128s2_bev_perception/srv/detail/prepare_shape_memory_commit__rosidl_typesupport_introspection_cpp.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/environment/pythonpath.sh
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/environment/pythonpath.dsv
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/python3.12/site-packages/cx128s2_bev_perception-0.1.0-py3.12.egg-info/PKG-INFO
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/python3.12/site-packages/cx128s2_bev_perception-0.1.0-py3.12.egg-info/SOURCES.txt
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/python3.12/site-packages/cx128s2_bev_perception-0.1.0-py3.12.egg-info/dependency_links.txt
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/python3.12/site-packages/cx128s2_bev_perception-0.1.0-py3.12.egg-info/top_level.txt
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/python3.12/site-packages/cx128s2_bev_perception/__init__.py
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/python3.12/site-packages/cx128s2_bev_perception/_cx128s2_bev_perception_s.ep.rosidl_typesupport_c.c
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/python3.12/site-packages/cx128s2_bev_perception/_cx128s2_bev_perception_s.ep.rosidl_typesupport_fastrtps_c.c
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/python3.12/site-packages/cx128s2_bev_perception/_cx128s2_bev_perception_s.ep.rosidl_typesupport_introspection_c.c
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/python3.12/site-packages/cx128s2_bev_perception/cx128s2_bev_perception_s__rosidl_typesupport_c.so
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/python3.12/site-packages/cx128s2_bev_perception/cx128s2_bev_perception_s__rosidl_typesupport_fastrtps_c.so
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/python3.12/site-packages/cx128s2_bev_perception/cx128s2_bev_perception_s__rosidl_typesupport_introspection_c.so
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/python3.12/site-packages/cx128s2_bev_perception/msg/__init__.py
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/python3.12/site-packages/cx128s2_bev_perception/msg/_crane_beam_motion_debug.py
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/python3.12/site-packages/cx128s2_bev_perception/msg/_crane_beam_motion_debug_s.c
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/python3.12/site-packages/cx128s2_bev_perception/msg/_crane_beam_status.py
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/python3.12/site-packages/cx128s2_bev_perception/msg/_crane_beam_status_s.c
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/python3.12/site-packages/cx128s2_bev_perception/msg/_perception_recording_frame.py
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/python3.12/site-packages/cx128s2_bev_perception/msg/_perception_recording_frame_s.c
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/python3.12/site-packages/cx128s2_bev_perception/msg/_recording_object_cluster.py
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/python3.12/site-packages/cx128s2_bev_perception/msg/_recording_object_cluster_s.c
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/python3.12/site-packages/cx128s2_bev_perception/msg/_tracked_object.py
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/python3.12/site-packages/cx128s2_bev_perception/msg/_tracked_object_array.py
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/python3.12/site-packages/cx128s2_bev_perception/msg/_tracked_object_array_s.c
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/python3.12/site-packages/cx128s2_bev_perception/msg/_tracked_object_s.c
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/python3.12/site-packages/cx128s2_bev_perception/srv/__init__.py
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/python3.12/site-packages/cx128s2_bev_perception/srv/_commit_shape_memory.py
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/python3.12/site-packages/cx128s2_bev_perception/srv/_commit_shape_memory_s.c
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/python3.12/site-packages/cx128s2_bev_perception/srv/_control_shape_memory.py
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/python3.12/site-packages/cx128s2_bev_perception/srv/_control_shape_memory_s.c
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/python3.12/site-packages/cx128s2_bev_perception/srv/_prepare_shape_memory_commit.py
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/python3.12/site-packages/cx128s2_bev_perception/srv/_prepare_shape_memory_commit_s.c
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/python3.12/site-packages/cx128s2_bev_perception/cx128s2_bev_perception_s__rosidl_typesupport_fastrtps_c.so
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/python3.12/site-packages/cx128s2_bev_perception/cx128s2_bev_perception_s__rosidl_typesupport_introspection_c.so
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/python3.12/site-packages/cx128s2_bev_perception/cx128s2_bev_perception_s__rosidl_typesupport_c.so
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/ament_index/resource_index/rust_packages/cx128s2_bev_perception
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/rust/Cargo.toml
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/rust/build.rs
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/rust/src/lib.rs
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/rust/src/msg.rs
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/rust/src/msg/rmw.rs
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/rust/src/srv.rs
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/rust/src/srv/rmw.rs
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/msg/TrackedObject.idl
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/msg/TrackedObjectArray.idl
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/msg/RecordingObjectCluster.idl
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/msg/PerceptionRecordingFrame.idl
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/msg/CraneBeamStatus.idl
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/msg/CraneBeamMotionDebug.idl
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/srv/CommitShapeMemory.idl
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/srv/ControlShapeMemory.idl
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/srv/PrepareShapeMemoryCommit.idl
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/msg/TrackedObject.msg
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/msg/TrackedObjectArray.msg
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/msg/RecordingObjectCluster.msg
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/msg/PerceptionRecordingFrame.msg
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/msg/CraneBeamStatus.msg
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/msg/CraneBeamMotionDebug.msg
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/srv/CommitShapeMemory.srv
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/srv/ControlShapeMemory.srv
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/srv/PrepareShapeMemoryCommit.srv
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/cx128s2_bev_perception/cx128s2_bev_perception_node
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/libcrane_beam_detector.so
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/libvisibility_model.so
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/cx128s2_bev_perception/roi_bev_editor.py
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/cx128s2_bev_perception/roi_bev_control_panel.py
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/cx128s2_bev_perception/iir_track_benchmark.py
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/cx128s2_bev_perception/kalman_filter_benchmark.py
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/config/crane_hook_debug.rviz
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/config/crane_hook_reference.yaml
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/config/cx128s2_bev_perception.yaml
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/config/cx128s2_bev_perception_crane.yaml
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/config/cx128s2_object_memory_bank.yaml
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/config/cx128s2_roi_policy.yaml
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/config/cx128s2_roi_policy_crane.yaml
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/config/cx128s2_static_background.yaml
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/config/roi_policy_example.yaml
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/launch/crane_hook_debug.launch.py
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/launch/cx128s2_bev_perception.launch.py
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/crane_beam_detector.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/crane_hook_detector.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/linear_kalman_filter.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/point_types.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/raw_vehicle_box_refinement.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/vehicle_status.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/vehicle_surface_tracking.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/include/cx128s2_bev_perception/visibility_model.hpp
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/ament_index/resource_index/package_run_dependencies/cx128s2_bev_perception
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/ament_index/resource_index/parent_prefix_path/cx128s2_bev_perception
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/environment/ament_prefix_path.sh
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/environment/ament_prefix_path.dsv
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/environment/path.sh
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/environment/path.dsv
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/local_setup.bash
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/local_setup.sh
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/local_setup.zsh
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/local_setup.dsv
+-- Symlinking: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/package.dsv
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/ament_index/resource_index/packages/cx128s2_bev_perception
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/cmake/rosidl_cmake-extras.cmake
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/cmake/ament_cmake_export_dependencies-extras.cmake
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/cmake/ament_cmake_export_include_directories-extras.cmake
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/cmake/ament_cmake_export_libraries-extras.cmake
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/cmake/ament_cmake_export_targets-extras.cmake
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/cmake/rosidl_cmake_aggregate_target-extras.cmake
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/cmake/cx128s2_bev_perceptionConfig.cmake
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/cmake/cx128s2_bev_perceptionConfig-version.cmake
+-- Up-to-date symlink: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/package.xml
+-- Up-to-date: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/libcx128s2_bev_perception__rosidl_generator_c.so
+-- Up-to-date: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/libcx128s2_bev_perception__rosidl_typesupport_fastrtps_c.so
+-- Up-to-date: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/libcx128s2_bev_perception__rosidl_typesupport_fastrtps_cpp.so
+-- Up-to-date: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/libcx128s2_bev_perception__rosidl_typesupport_introspection_c.so
+-- Up-to-date: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/libcx128s2_bev_perception__rosidl_typesupport_c.so
+-- Up-to-date: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/libcx128s2_bev_perception__rosidl_typesupport_introspection_cpp.so
+-- Up-to-date: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/libcx128s2_bev_perception__rosidl_typesupport_cpp.so
+Listing '/home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/python3.12/site-packages/cx128s2_bev_perception'...
+Listing '/home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/python3.12/site-packages/cx128s2_bev_perception/msg'...
+Listing '/home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/python3.12/site-packages/cx128s2_bev_perception/srv'...
+-- Up-to-date: /home/sjjin/construct_ws/install/cx128s2_bev_perception/lib/libcx128s2_bev_perception__rosidl_generator_py.so
+-- Up-to-date: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/cmake/export_cx128s2_bev_perception__rosidl_generator_cExport.cmake
+-- Up-to-date: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/cmake/export_cx128s2_bev_perception__rosidl_generator_cExport-release.cmake
+-- Up-to-date: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/cmake/export_cx128s2_bev_perception__rosidl_typesupport_fastrtps_cExport.cmake
+-- Up-to-date: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/cmake/export_cx128s2_bev_perception__rosidl_typesupport_fastrtps_cExport-release.cmake
+-- Up-to-date: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/cmake/export_cx128s2_bev_perception__rosidl_generator_cppExport.cmake
+-- Up-to-date: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/cmake/export_cx128s2_bev_perception__rosidl_typesupport_fastrtps_cppExport.cmake
+-- Up-to-date: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/cmake/export_cx128s2_bev_perception__rosidl_typesupport_fastrtps_cppExport-release.cmake
+-- Up-to-date: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/cmake/cx128s2_bev_perception__rosidl_typesupport_introspection_cExport.cmake
+-- Up-to-date: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/cmake/cx128s2_bev_perception__rosidl_typesupport_introspection_cExport-release.cmake
+-- Up-to-date: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/cmake/cx128s2_bev_perception__rosidl_typesupport_cExport.cmake
+-- Up-to-date: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/cmake/cx128s2_bev_perception__rosidl_typesupport_cExport-release.cmake
+-- Up-to-date: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/cmake/cx128s2_bev_perception__rosidl_typesupport_introspection_cppExport.cmake
+-- Up-to-date: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/cmake/cx128s2_bev_perception__rosidl_typesupport_introspection_cppExport-release.cmake
+-- Up-to-date: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/cmake/cx128s2_bev_perception__rosidl_typesupport_cppExport.cmake
+-- Up-to-date: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/cmake/cx128s2_bev_perception__rosidl_typesupport_cppExport-release.cmake
+-- Up-to-date: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/cmake/export_cx128s2_bev_perception__rosidl_generator_pyExport.cmake
+-- Up-to-date: /home/sjjin/construct_ws/install/cx128s2_bev_perception/share/cx128s2_bev_perception/cmake/export_cx128s2_bev_perception__rosidl_generator_pyExport-release.cmake

@@ -1,0 +1,7 @@
+std_msgs/Header header
+sensor_msgs/PointCloud2 transformed_cloud
+sensor_msgs/PointCloud2 foreground_cloud
+uint32 source_point_count
+uint32 foreground_point_count
+uint32 cluster_count
+cx128s2_bev_perception/RecordingObjectCluster[] objects

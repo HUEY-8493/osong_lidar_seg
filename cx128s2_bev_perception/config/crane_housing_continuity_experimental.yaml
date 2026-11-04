@@ -1,0 +1,4 @@
+# Apply after the current Crane configuration. No bank/reference edits.
+cx128s2_bev_perception:
+  ros__parameters:
+    crane_slope.sheave.track_continuity_enabled: true

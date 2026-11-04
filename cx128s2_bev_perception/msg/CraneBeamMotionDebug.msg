@@ -1,0 +1,50 @@
+std_msgs/Header header
+
+uint8 fsm_state
+string fsm_state_name
+string motion_reference_mode
+
+float64 dt_sec
+
+float64 z_background_raw
+float64 z_background_filtered
+float64 z_beam_raw
+float64 z_beam_filtered
+float64 height_gap_raw
+float64 height_gap_filtered
+float64 beam_high_z_indicator
+float64 beam_high_z_reject_threshold
+
+float64 dz_background_raw
+float64 dz_background_filtered
+float64 dz_beam_raw
+float64 dz_beam_filtered
+float64 relative_dz_raw
+float64 relative_dz_filtered
+
+float64 v_background_raw
+float64 v_background_filtered
+float64 v_beam_raw
+float64 v_beam_filtered
+
+float64 bg_mad
+float64 beam_mad
+float64 move_threshold
+
+bool background_valid
+bool beam_valid
+bool beam_cluster_valid
+bool beam_high_z_rejected
+bool seed_roi_connected
+
+uint8 ACQUISITION_RESET_NONE=0
+uint8 ACQUISITION_RESET_NO_SEED_CONNECTION=1
+uint8 acquisition_reset_reason
+bool crane_moving
+
+float64 initial_cluster_length
+float64 initial_cluster_elongation
+
+uint32 background_point_count
+uint32 beam_roi_point_count
+uint32 beam_cluster_point_count

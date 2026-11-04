@@ -1,0 +1,26 @@
+roi_policy:
+  version: 1
+  frame_id: "world"
+  zones:
+    - name: "main_watch_lane"
+      type: "watch"
+      shape: "polygon"
+      enabled: true
+      polygon_x: [0.0, 120.0, 120.0, 0.0]
+      polygon_y: [-8.0, -12.0, 12.0, 8.0]
+
+    - name: "left_wall_ignore"
+      type: "hard_ignore"
+      shape: "polygon"
+      enabled: true
+      polygon_x: [10.0, 100.0, 100.0, 10.0]
+      polygon_y: [15.0, 15.0, 30.0, 30.0]
+
+    - name: "tree_noise_area"
+      type: "ignore"
+      shape: "box"
+      enabled: true
+      x_min: 30.0
+      x_max: 45.0
+      y_min: -25.0
+      y_max: -15.0

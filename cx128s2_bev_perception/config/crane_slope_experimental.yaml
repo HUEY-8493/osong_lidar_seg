@@ -1,0 +1,30 @@
+# Opt-in Height-Based Surface experiment. Historical Slope/PCA code is retained,
+# but never called by this mode. Existing deployment YAML/launch are unchanged.
+/cx128s2_bev_perception:
+  ros__parameters:
+    perception_mode: crane_beam_work
+    crane_pipeline: height_surface
+    target_frame: world
+    use_tf_transform: true
+    fallback_to_raw_frame: false
+    publish_debug_topics: true
+    publish_debug_valid_points: true
+    debug_cloud_max_points: 0
+    debug_cloud_publish_period_sec: 0.0
+    crane_beam.freeze_sensor_transform: false
+    visibility:
+      enabled: true
+      sensor_frame: laser_link
+      # Reuse the actual driver configuration; no driver/hardware is launched here.
+      driver_config_file: /home/sjjin/construct_ws/src/lslidar_ros2/lslidar_driver/config/lslidar_ch.yaml
+    # Experimental initial values: tune on real observations.
+    height_surface:
+      enabled: true
+      z_bin_size: 0.05
+      max_neighbor_dz: 0.05
+      max_surface_z_spread: 0.08
+      max_xy_neighbor_distance: 0.15
+      min_surface_points: 20
+      min_surface_length: 0.20
+      min_surface_width: 0.02
+      publish_debug: true

@@ -1,0 +1,70 @@
+lidar_extrinsic:
+  parent_frame: map
+  child_frame: lidar
+  frame_convention:
+    x: forward
+    y: left
+    z: up
+  x: 0.0
+  y: 0.0
+  z: 6.638276670931532
+  roll: -1.5671972765207525
+  pitch: -0.027489352235824036
+  yaw: 0.0
+  roll_deg: -89.79378960903614
+  pitch_deg: -1.5750238646612305
+  yaw_deg: 0.0
+  calibration:
+    method: ground_plane_ransac_manual_x_y_yaw
+    ground_z: 0.0
+    plane_normal_lidar:
+    - 0.027485890245425578
+    - -0.9996157174215531
+    - 0.003597682755628448
+    plane_d: 6.638276670931532
+    used_frames: 30
+    used_files:
+    - /home/sjjin/construct_ws/src/lidar_ground_tools/measurements/crane_2026_09_22_032118/pcd/frame_0001.pcd
+    - /home/sjjin/construct_ws/src/lidar_ground_tools/measurements/crane_2026_09_22_032118/pcd/frame_0002.pcd
+    - /home/sjjin/construct_ws/src/lidar_ground_tools/measurements/crane_2026_09_22_032118/pcd/frame_0003.pcd
+    - /home/sjjin/construct_ws/src/lidar_ground_tools/measurements/crane_2026_09_22_032118/pcd/frame_0004.pcd
+    - /home/sjjin/construct_ws/src/lidar_ground_tools/measurements/crane_2026_09_22_032118/pcd/frame_0005.pcd
+    - /home/sjjin/construct_ws/src/lidar_ground_tools/measurements/crane_2026_09_22_032118/pcd/frame_0006.pcd
+    - /home/sjjin/construct_ws/src/lidar_ground_tools/measurements/crane_2026_09_22_032118/pcd/frame_0007.pcd
+    - /home/sjjin/construct_ws/src/lidar_ground_tools/measurements/crane_2026_09_22_032118/pcd/frame_0008.pcd
+    - /home/sjjin/construct_ws/src/lidar_ground_tools/measurements/crane_2026_09_22_032118/pcd/frame_0009.pcd
+    - /home/sjjin/construct_ws/src/lidar_ground_tools/measurements/crane_2026_09_22_032118/pcd/frame_0010.pcd
+    - /home/sjjin/construct_ws/src/lidar_ground_tools/measurements/crane_2026_09_22_032118/pcd/frame_0011.pcd
+    - /home/sjjin/construct_ws/src/lidar_ground_tools/measurements/crane_2026_09_22_032118/pcd/frame_0012.pcd
+    - /home/sjjin/construct_ws/src/lidar_ground_tools/measurements/crane_2026_09_22_032118/pcd/frame_0013.pcd
+    - /home/sjjin/construct_ws/src/lidar_ground_tools/measurements/crane_2026_09_22_032118/pcd/frame_0014.pcd
+    - /home/sjjin/construct_ws/src/lidar_ground_tools/measurements/crane_2026_09_22_032118/pcd/frame_0015.pcd
+    - /home/sjjin/construct_ws/src/lidar_ground_tools/measurements/crane_2026_09_22_032118/pcd/frame_0016.pcd
+    - /home/sjjin/construct_ws/src/lidar_ground_tools/measurements/crane_2026_09_22_032118/pcd/frame_0017.pcd
+    - /home/sjjin/construct_ws/src/lidar_ground_tools/measurements/crane_2026_09_22_032118/pcd/frame_0018.pcd
+    - /home/sjjin/construct_ws/src/lidar_ground_tools/measurements/crane_2026_09_22_032118/pcd/frame_0019.pcd
+    - /home/sjjin/construct_ws/src/lidar_ground_tools/measurements/crane_2026_09_22_032118/pcd/frame_0020.pcd
+    - /home/sjjin/construct_ws/src/lidar_ground_tools/measurements/crane_2026_09_22_032118/pcd/frame_0021.pcd
+    - /home/sjjin/construct_ws/src/lidar_ground_tools/measurements/crane_2026_09_22_032118/pcd/frame_0022.pcd
+    - /home/sjjin/construct_ws/src/lidar_ground_tools/measurements/crane_2026_09_22_032118/pcd/frame_0023.pcd
+    - /home/sjjin/construct_ws/src/lidar_ground_tools/measurements/crane_2026_09_22_032118/pcd/frame_0024.pcd
+    - /home/sjjin/construct_ws/src/lidar_ground_tools/measurements/crane_2026_09_22_032118/pcd/frame_0025.pcd
+    - /home/sjjin/construct_ws/src/lidar_ground_tools/measurements/crane_2026_09_22_032118/pcd/frame_0026.pcd
+    - /home/sjjin/construct_ws/src/lidar_ground_tools/measurements/crane_2026_09_22_032118/pcd/frame_0027.pcd
+    - /home/sjjin/construct_ws/src/lidar_ground_tools/measurements/crane_2026_09_22_032118/pcd/frame_0028.pcd
+    - /home/sjjin/construct_ws/src/lidar_ground_tools/measurements/crane_2026_09_22_032118/pcd/frame_0029.pcd
+    - /home/sjjin/construct_ws/src/lidar_ground_tools/measurements/crane_2026_09_22_032118/pcd/frame_0030.pcd
+    inlier_count_median: 7970.5
+    ransac_distance_threshold: 0.03
+  validation:
+    mean_z_error: 0.0004119051823316843
+    median_z_error: 0.0015353800078283797
+    max_abs_z_error: 0.060399267215994534
+    std_z_error: 0.014328767597170817
+  manual_inputs:
+    manual_x: 0.0
+    manual_y: 0.0
+    manual_yaw_deg: 0.0
+    manual_y_recommended_range_m:
+    - 2.5
+    - 3.5

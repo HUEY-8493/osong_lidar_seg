@@ -1,0 +1,7 @@
+int32 track_id
+bool freeze_after_commit
+string class_label
+string[] applicable_component_types
+---
+bool success
+string message

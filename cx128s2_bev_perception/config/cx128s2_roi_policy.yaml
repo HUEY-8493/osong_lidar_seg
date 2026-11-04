@@ -1,0 +1,68 @@
+roi_policy:
+  version: 1
+  frame_id: world
+  zones:
+  - name: roi_1
+    type: watch
+    shape: box
+    enabled: true
+    x_min: -46.54893794252398
+    x_max: 1.041232819658461
+    y_min: -3.053311120366374
+    y_max: 1.694294044148421
+  - name: roi_2
+    type: watch
+    shape: box
+    enabled: true
+    x_min: -46.319033735943364
+    x_max: -46.319033735943364
+    y_min: -4.283215326946959
+    y_max: -4.283215326946959
+  - name: roi_3
+    type: watch
+    shape: box
+    enabled: true
+    x_min: -46.089129529362765
+    x_max: -46.089129529362765
+    y_min: -4.053311120366374
+    y_max: -4.053311120366374
+  - name: roi_4
+    type: watch
+    shape: box
+    enabled: true
+    x_min: -47.00874635568513
+    x_max: -45.85922532278218
+    y_min: -4.053311120366374
+    y_max: -4.053311120366374
+  - name: roi_5
+    type: watch
+    shape: box
+    enabled: true
+    x_min: -134.8321532694711
+    x_max: -46.089129529362765
+    y_min: -3.053311120366374
+    y_max: 1.234485630987237
+  - name: roi_6
+    type: hard_ignore
+    shape: box
+    enabled: true
+    x_min: -133.9125364431487
+    x_max: 105.3877551020408
+    y_min: -39.67346938775506
+    y_max: -3.053311120366374
+  - name: roi_7
+    type: hard_ignore
+    shape: box
+    enabled: true
+    x_min: -188.97959183673473
+    x_max: -133.14285714285714
+    y_min: -64.65306122448973
+    y_max: 97.95918367346951
+  - name: roi_8
+    type: hard_ignore
+    shape: box
+    enabled: true
+    x_min: -132.16326530612253
+    x_max: 105.3877551020408
+    y_min: 1.4693877551021615
+    y_max: 51.91836734693882

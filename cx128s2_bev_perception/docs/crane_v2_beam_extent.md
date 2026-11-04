@@ -1,0 +1,13 @@
+# V2 R15 development baseline: observed Beam extent
+
+This follow-up changes only Cargo Body selection and measured geometry. The production F2 path, launch/YAML, ROS messages, Hook/Housing, Ground, bottom estimator, motion and FSM remain unchanged. R15 and its pre-existing uncommitted files are backed up under `/home/sjjin/crane_version_review/v2_beam_extent_20261102/r15_backup`.
+
+The original truncation occurs before final geometry: sparse/occluded skin loses the lateral-cell eligibility test, splitting the observed Beam into different 3D components. The final PCA/min-max measurement cannot recover points outside its input component. `recoverObservedBody` uses the existing compact cells and lookup with a normalized repeated material profile. Current connected surface may be recovered across sparse cells. A disconnected fragment needs a previously directly observed footprint, current profile/top/axis agreement, substantial current surface support and no intervening incompatible object. Historical shape never supplies Raw points.
+
+`extentDiagnostics` records current actual Raw endpoints, support counts, XY span, a supplementary 3D fitted-axis span, and `OBSERVED_LENGTH` / `PARTIAL_OBSERVATION` / `ESTIMATED_EXTENT` diagnostics. Existing public `beam_length` keeps its XY-axis convention; `beam_length_locked` retains the unchanged tracking model maximum. The locked model is not proof of a currently visible physical end.
+
+End supports exclude lone outliers and attached thin Wire. A terminal widening or tall contact region is treated conservatively; ambiguous end material may be excluded and marked partial. A compact short body can pass only with sufficient filled current surface and cannot steal a short piece of an already observed larger Cargo. The 0.5m controlled body test does not change the existing bottom estimator's 0.6m support requirement or assert SUSPENDED.
+
+Build the existing V2 targets and `test_crane_v2_extent`; no installation is required. The extent test covers 12m/20m bodies, Hook-ROI-external ends, yaw, occlusion, sparse skin/endpoints, unobserved ends, historical reacquisition, parallel/attached objects, Wire, a single outlier, an intervening object, a grounded end and compact 0.5m material. Existing V2/ROS/pipeline/motion-policy tests are retained.
+
+Detailed before/after Raw ownership, per-stage evidence, full four-bag results, performance and limitations are in `/home/sjjin/crane_version_review/v2_beam_extent_20261102/REPORT.md`. Actual physical Beam length has no independent site measurement; measured Raw span must not be described as a proven full physical length. No operational install, service restart or Redis write is included.

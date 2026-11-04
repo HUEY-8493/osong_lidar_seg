@@ -1,0 +1,582 @@
+/cx128s2_bev_perception:
+  ros__parameters:
+    # ============================================================
+    # 0. Perception Mode Selector
+    # ============================================================
+    # Mode selection: "default" for general perception/clustering/tracking,
+    #                 "crane_beam_work" for Crane Beam Work Detection FSM.
+    perception_mode: "crane_beam_work"
+    publish_debug_topics: true
+
+    # ============================================================
+    # Crane Beam Work Detection Mode Parameters
+    # (Active when perception_mode == "crane_beam_work")
+    # ============================================================
+    crane_beam_enabled: true
+    crane_beam:
+      # Motion reference mode: "auto" (defaults to "absolute" if target_frame is world/map/odom,
+      #                        otherwise "relative_background"),
+      #                        "absolute" (uses dz_beam),
+      #                        "relative_background" (uses dz_beam - dz_background).
+      motion_reference_mode: "auto"
+
+      # Initial Beam ROI [m] in target_frame (seed region for initial acquisition)
+      beam_roi_x_min: -0.2
+      beam_roi_x_max: 0.2
+      beam_roi_y_min: -0.2
+      beam_roi_y_max: 0.2
+      beam_roi_z_min: 0.0
+      beam_roi_z_max: 5.0
+
+      # Background / Ground Support ROI [m] in target_frame (Beam ROI is excluded)
+      background_roi_x_min: -2.0
+      background_roi_x_max: 2.0
+      background_roi_y_min: -2.0
+      background_roi_y_max: 2.0
+      background_roi_z_min: -0.5
+      background_roi_z_max: 6.0
+
+      # Point count requirements
+      min_beam_roi_points: 10
+      min_background_roi_points: 20
+      min_beam_cluster_points: 15
+
+      # Z-band around representative z_beam for candidate extraction [m]
+      # Also rejects initial Hook candidates within this distance of a current
+      # valid Beam median; confirmed Hook tracking is exempt.
+      beam_z_band: 0.30
+
+      # FSM motion thresholds [m]
+      lift_dz_threshold: 0.05
+      lower_dz_threshold: 0.05
+      stop_dz_threshold: 0.02
+      hook_beam_dz_match_tolerance: 0.03 # [m/frame] measured Hook/Beam displacement agreement
+      ground_tolerance: 0.05
+      landing_height_gap_threshold: 0.45
+      # Confirmed measured Hook KF XY: fixed-anchor START, latched MOVING,
+      # consecutive real-measurement STOP window. Independent of tracking gates.
+      crane_move_start_x: 0.10
+      crane_move_start_y: 0.10
+      crane_move_stop_x: 0.02
+      crane_move_stop_y: 0.05
+      crane_move_stop_frames: 10
+
+      # Consecutive frame confirmation counts
+      lift_confirm_frames: 5
+      suspend_confirm_frames: 3
+      lower_confirm_frames: 5
+      placed_confirm_frames: 3
+      complete_confirm_frames: 5
+
+      # Dropout tolerance
+      beam_measurement_max_lost_frames: 3
+
+      # Legacy length stability knobs retained; first valid acquisition now locks geometry
+      length_stable_threshold: 0.10
+      length_lock_frames: 5
+      cluster_bev_res: 0.05
+      continuity_gate_xy: 2.5
+      beam_z_histogram_bin_size: 0.05
+      beam_ground_clearance: 0.12
+      tracking_gate_xy: 1.2
+      tracking_gate_z: 0.50
+      tracking_gate_yaw: 0.35
+      tracking_gate_length: 1.0
+      support_search_margin_xy: 0.60
+      min_support_points: 15
+      placement_tolerance: 0.10
+      beam_default_height: 0.40
+
+      # Cumulative vertical motion evidence (Mitigates slow lift / lower dead-zone)
+      # At 10Hz, cumulative motion over 4 frames (0.4s) allows detecting slow motion down to 0.05m/s (3m/min).
+      cumulative_motion_enabled: true
+      cumulative_lift_distance: 0.12       # [m] cumulative upward displacement to confirm lift
+      cumulative_lower_distance: 0.12      # [m] cumulative downward displacement to confirm lower
+      cumulative_motion_min_frames: 4      # [frames] min persistent directional frames
+      cumulative_direction_epsilon: 0.003  # [m/frame] directional motion noise threshold (0.03 m/s)
+
+      # Local Support Surface planar extent & contamination filtering
+      # Rejects standing workers (~0.4x0.4m) and vertical poles while accepting wide planar truck decks (>0.6m)
+      support_min_xy_extent: 0.60          # [m] min horizontal span max(dx, dy)
+      support_max_z_spread: 0.08           # [m] max vertical MAD within candidate support patch
+      support_temporal_continuity: true    # prefer continuous support level if available
+
+      # Tilted Touchdown multi-segment evaluation
+      # Divides beam along PCA major axis into 3 segments (Tip A, Center, Tip B) to prevent premature placement of hanging beams
+      tilt_segmentation_enabled: true
+      tilt_num_segments: 3                 # number of longitudinal segments
+      min_supported_segment_ratio: 0.60    # fraction of segments supported required for placed_candidate
+
+      # Initial Cluster Shape Gating
+      # Rejects non-beam objects (workers, poles, boxes) during initial IDLE acquisition
+      min_initial_cluster_length: 2.0      # [m] min PCA length
+      min_initial_cluster_elongation: 1.8  # min length / width ratio
+
+      # Reject an initially high candidate only when its geometry is not Beam-like.
+      # The p90 candidate Z is compared with broad Background median for this
+      # acquisition-only guard; it is never used as a placement/support height.
+      beam_high_z_gate_enabled: true
+      beam_high_z_reject_threshold: 1.0    # [m] p90(Beam ROI Z) - background median
+      beam_high_z_require_cluster_valid: true
+
+      # Sensor transform freeze (disables dynamic Gazebo TF compensation)
+      # When enabled, the sensor-to-target transform is locked at startup so crane motion is observed
+      # directly in the point cloud via relative background dz rather than cheated by Gazebo moving TF.
+      freeze_sensor_transform: true
+
+      # EMA filter on representative Z
+      use_z_ema: true
+      z_ema_alpha: 0.3
+
+      # Visualization and debug outputs
+      publish_debug: true
+      diagnostics_period_sec: 1.0
+
+      # ============================================================
+      # Crane Hook Detection & prepare_ready Parameters (not an FSM state)
+      # ============================================================
+      hook:
+        enabled: true
+        # Empty: installed config/crane_hook_reference.yaml. Missing file falls back.
+        # Collection/save are explicit HOOK_REFERENCE_BEGIN/SAVE commands, not runtime adaptation.
+        reference_file: ""
+        reference_min_frames: 30
+
+        # Left / Right Hook 3D ROI in target_frame (calibrated world, Z=0 ground)
+        # TODO / tuning parameter: Adjust lateral X bounds based on crane trolley / hook physical spacing
+        roi_left_x_min: -1.5
+        roi_left_x_max: -0.3
+        roi_right_x_min: 0.3
+        roi_right_x_max: 1.5
+
+        # Lateral Y bounds (forward / backward depth relative to crane boom)
+        # TODO / tuning parameter: Adjust depth Y bounds for hook swinging margin
+        roi_y_min: -0.8
+        roi_y_max: 0.8
+
+        # Initial acquisition: body bottom minus valid local ground must be >=3m.
+        # Confirmed updates can descend below this height; roi_z_max remains world Z.
+        roi_z_min: 3.0
+        roi_z_max: 6.2
+
+        # Hook Body vertical sliding window parameters
+        # TODO / tuning parameter: window_size_z matches physical hook block height (~0.30m)
+        window_size_z: 0.30
+        window_step_z: 0.02
+        # TODO / tuning parameter: Minimum body point density threshold
+        min_body_points: 300
+
+        # Reuse the existing CV Kalman filter; fixed ROIs above remain unchanged.
+        tracking_enabled: true
+        tracking_confirm_frames: 3
+        tracking_gate_xy: 0.35         # center association / margin around remembered body [m]
+        tracking_gate_z: 0.45          # base vertical gate [m]
+        tracking_gate_z_max: 0.80      # cap including |vz| * sensor dt [m]
+        tracking_max_lost_frames: 5    # prediction on missing frames 1..5
+        tracking_prediction_timeout_sec: 0.75  # also bounds dropped-frame gaps
+        tracking_accel_std_xy: 0.5     # XY acceleration uncertainty [m/s^2]
+        tracking_accel_std_z: 1.5      # vertical acceleration uncertainty [m/s^2]
+        tracking_measurement_std: 0.03 # body median position uncertainty [m]
+
+        # Ground reference estimation parameters
+        # TODO / tuning parameter: Ground search band around calibrated ground plane (Z=0)
+        ground_search_z_min: -0.5
+        ground_search_z_max: 0.8
+        ground_bin_size: 0.05
+        min_ground_points: 50
+
+        # Independent per-side preparation; latched by Beam geometry acquisition for the cycle
+        # READY: same confirmed Hook descending, measured bottom-ground height <=4m.
+        prepare_distance: 4.0
+        # Release in the same ground-relative height (>4.2m or on valid measurement loss).
+        prepare_release_margin: 0.20
+        # TODO / tuning parameter: Number of consecutive confirmation frames to prevent readiness flag chattering
+        prepare_confirm_frames: 1
+
+    # ============================================================
+    # 1. Input frame / TF
+    # ============================================================
+    # Raw LiDAR PointCloud2 input.
+    # input_topic: "/sensing/lidar/pointcloud2"
+    input_topic:    "/ch/lslidar_point_cloud"
+
+    # Main perception frame. ROI/background/clustering/tracking all use this frame.
+    # For this setup, world is the default working frame.
+    target_frame: "world"
+    use_tf_transform: true
+    tf_timeout_sec: 0.05
+    fallback_to_raw_frame: false
+
+    # Publish input cloud transformed to target_frame for debugging.
+    publish_transformed_cloud: false
+    transformed_cloud_topic: "/debug/road_frame_points"
+    output_frame_policy: "target_frame"
+
+    # ============================================================
+    # 2. Valid crop in world X/Y/Z
+    # ============================================================
+    # X: forward/backward range [m].
+    valid_x_min: -25.0
+    valid_x_max: 25.0
+
+    # Y: lateral range [m].
+    valid_y_min: -25.0
+    valid_y_max: 25.0
+
+    # Z: height range [m]. Z is only used for filtering/statistics, not BEV axes.
+    valid_z_min: -0.5
+    valid_z_max: 7.5
+
+    # Radial distance filter in X-Y plane [m].
+    valid_range_min: 0.0
+    valid_range_max: 40.0
+
+    # ============================================================
+    # 3. ROI policy
+    # ============================================================
+    # Legacy single ROI switch. New workflow should use use_roi_policy=true.
+    roi_enabled: false
+    roi_shape: "polygon"
+    roi_apply_stage: "alert"
+    roi_x_min: 0.0
+    roi_x_max: 200.0
+    roi_y_min: -8.0
+    roi_y_max: 8.0
+    roi_polygon_x: [0.0, 200.0, 200.0, 0.0]
+    roi_polygon_y: [-4.0, -8.0, 8.0, 4.0]
+    roi_file: "/cx128s2_roi.yaml"
+
+    # Multi-zone ROI policy file.
+    use_roi_policy: false
+    roi_policy_file: "/cx128s2_roi_policy.yaml"
+
+    # If true, points outside watch zones are not used.
+    require_watch_roi: false
+    discard_points_outside_watch_roi: false
+
+    # If true, ignore/hard_ignore zones are excluded during background learning.
+    apply_ignore_before_learning: true
+    publish_roi_policy_markers: true
+
+    # ============================================================
+    # 4. Static background & Ground separation
+    # ============================================================
+    # ground_only with use_fixed_ground_plane: true uses calibrated world Z=0 plane directly!
+    # No 20s background learning required, zero startup latency.
+    background_mode: "ground_only"
+    use_fixed_ground_plane: true
+    fixed_ground_z: 0.0
+    ground_margin_near: 0.08
+    ground_margin_mid: 0.10
+    ground_margin_long: 0.15
+    obstacle_min_height_above_ground: 0.08
+    obstacle_max_height_above_ground: 7.0
+
+    require_manual_background_learning: false
+    background_learning_input_mode: "valid"
+    background_learning_duration_sec: 20.0
+    background_learning_frames: 200
+    disable_alerts_during_background_learning: true
+
+    # Current intended mode: learn manually, then freeze.
+    background_update_mode: "manual_only"
+    freeze_background_after_learning: true
+    auto_save_background_after_learning: true
+    auto_load_background_on_start: false
+    background_map_file: "/cx128s2_static_background.yaml"
+
+    # Background grid resolution and occupancy thresholds.
+    background_voxel_size: 0.1
+    background_grid_x_resolution: 0.2
+    background_grid_y_resolution: 0.2
+    background_occupancy_threshold: 0.4
+    min_points_per_background_cell: 1
+    background_height_diff_threshold: 0.6
+
+    # ============================================================
+    # 5. Foreground/background classifier
+    # ============================================================
+    foreground_classifier_mode: "statistical_score"
+
+    # GDG-style interpretable score.
+    foreground_score_threshold: 1.0
+    foreground_count_weight: 0.45
+    foreground_mean_z_weight: 0.25
+    foreground_max_z_weight: 0.20
+    foreground_min_z_weight: 0.10
+    foreground_unknown_cell_score: 1.2
+    foreground_min_bg_std_z: 0.05
+    foreground_count_score_clip: 3.0
+    foreground_z_score_clip: 3.0
+
+    # Point-level Gaussian PDF mode parameters.
+    foreground_pdf_density_threshold: 0.3
+    foreground_voxel_diff_threshold: 3
+
+    # Legacy threshold parameter. Still used when mode is legacy_threshold.
+    foreground_count_diff_threshold: 8
+    foreground_min_persistence_frames: 3
+    enable_gdg_density_test: false
+
+    # ============================================================
+    # 6. Radius outlier removal
+    # ============================================================
+    enable_radius_outlier_removal: false
+    skip_ror_when_dense: true
+    ror_max_input_points: 20000
+    ror_radius: 0.8
+    ror_min_neighbors: 3
+
+    # ============================================================
+    # 7. Clustering (Tuned for Crane Top-Down BEV)
+    # ============================================================
+    # 0.2m x 0.2m high resolution grid for sharp object boundaries
+    bev_x_resolution: 0.05
+    bev_y_resolution: 0.05
+    min_points_per_occupied_cell: 2
+
+    # --- BEV connected-component topology ---------------------------------
+    # Stable operational topology. The experimental Z-layer switches below are
+    # kept available but disabled until edge-based Z compatibility is validated.
+    clustering_method: "bev_connected_component"
+    cluster_connectivity: 8
+
+    # Z guard: reject direct neighbours with separated vertical intervals [m].
+    cluster_z_guard_enabled: true
+    cluster_neighbor_max_z_gap: 0.4
+
+    # Sparse Z layers preserve height structure without building a dense 3D grid.
+    # Strong layer-cells have >= min_points_per_occupied_cell points; 1-point
+    # weak layer-cells can only support a strong-to-strong connection.
+    cluster_z_layer_enabled: true
+    cluster_z_layer_resolution: 0.05
+    cluster_weak_support_enabled: false
+    cluster_density_enabled: false
+    cluster_density_window_cells: 1
+    cluster_weak_support_min_density: 4
+    # Diagnostic-only: records Z-profile edge overlap; never changes topology.
+    cluster_z_profile_diagnostics_enabled: false
+    cluster_z_profile_bin_size: 0.30
+
+    # Existing stable bridge policy. Enable the experimental layer switches above
+    # only when running an explicit A/B probe.
+    cluster_gap_bridging_enabled: false
+    cluster_bridge_max_z_gap: 0.4
+
+    # Empty-cell allowance by endpoint range band (0 or 1 only).
+    cluster_gap_cells_near: 1
+    cluster_gap_cells_mid: 1
+    cluster_gap_cells_long: 1
+    cluster_edge_diagnostics_enabled: true
+
+    # Post-BFS support filters; they do not affect connectivity itself.
+    min_cluster_cells_near: 2
+    min_cluster_cells_mid: 2
+    min_cluster_cells_long: 1
+    min_cluster_points_near: 5
+    min_cluster_points_mid: 4
+    min_cluster_points_long: 3
+
+    # Range bands used by bridge allowance, filtering, gating and lost limits.
+    near_range_max: 20.0
+    mid_range_max: 40.0
+    long_range_max: 60.0
+
+    # ============================================================
+    # 8. Object classification
+    # ============================================================
+    # Vehicle size-based detector.
+    vehicle_detector_enabled: false
+    vehicle_min_height: 0.6
+    vehicle_max_height: 4.5
+    vehicle_min_width: 1.0
+    vehicle_max_width: 4.0
+    vehicle_max_length: 15.0
+    vehicle_min_score: 0.60
+    human_like_min_height: 0.8
+    human_like_max_height: 2.2
+    human_like_max_width: 1.2
+    human_like_max_length: 1.2
+    crane_like_min_height: 3.0
+    crane_like_min_vertical_extent: 2.5
+    crane_like_max_speed: 0.3
+
+    # Unknown obstacle fallback detector.
+    unknown_obstacle_detector_enabled: true
+    unknown_min_persistence_frames: 3
+
+    # ============================================================
+    # 9. Tracking and shape memory
+    # ============================================================
+    enable_tracking: true
+    tracking_filter_mode: "kalman"
+    tentative_confirm_frames: 5
+    tentative_confirm_hits: 3
+    max_lost_frames_near: 15
+    max_lost_frames_mid: 25
+    max_lost_frames_long: 40
+
+    # Association gates are squared-distance style thresholds in code.
+    gate_threshold_near: 12.0
+    gate_threshold_mid: 14.0
+    gate_threshold_long: 20.0
+
+    motion_speed_threshold: 0.3
+    direction_dominance_ratio: 1.5
+    vehicle_stopped_duration_sec: 10.0
+    keep_box_while_lost: true
+    predicted_track_marker_alpha: 0.18
+
+    # Shape memory is used to keep large/sparse objects associated.
+    enable_shape_memory_tracking: true
+
+    # Recommended truck workflow:
+    # prepare service captures the heavy observed graph once, then commit.
+    shape_graph_compute_policy: "manual_prepare"
+    shape_memory_learning_mode: "manual_commit"
+    shape_memory_freeze_after_commit: true
+
+    # Association mix between memory match and centroid/distance match.
+    shape_memory_match_weight: 0.5
+    shape_memory_distance_weight: 0.5
+    shape_memory_min_match_score: 0.35
+
+    # Online update behavior. For committed truck memory, keep conservative.
+    shape_memory_update_alpha: 0.2
+    shape_memory_keep_while_lost: true
+    shape_memory_min_update_points: 20
+    shape_memory_min_update_nodes: 3
+    shape_memory_dimension_shrink_limit: 0.15
+    shape_memory_allow_auto_update_after_commit: false
+    shape_memory_allow_dimension_shrink: false
+
+    # Shape-memory-specific lost limits.
+    shape_memory_max_lost_frames_near: 20
+    shape_memory_max_lost_frames_mid: 35
+    shape_memory_max_lost_frames_long: 60
+
+    # Commit validity requirements.
+    shape_memory_commit_min_nodes: 5
+    shape_memory_commit_min_edges: 4
+    shape_memory_commit_min_confidence: 0.5
+    shape_memory_min_confidence_to_use: 0.25
+
+    # Missing node/edge decay. 0.0 means no decay after commit.
+    shape_memory_edge_missing_decay: 0.0
+    shape_memory_node_missing_decay: 0.0
+
+    # Stored endpoint relation cap for prepared memory.
+    # Matching still uses top-K shape_memory_max_match_relations below.
+    shape_memory_max_endpoint_relations: 200
+
+    # Commit cache lifecycle.
+    shape_memory_clear_observed_cache_after_commit: true
+
+    # Lightweight real-time memory comparison.
+    # These voxel sizes downsample only the current observation, not prepared memory.
+    shape_memory_compare_voxel_size_near: 0.50
+    shape_memory_compare_voxel_size_mid: 0.80
+    shape_memory_compare_voxel_size_long: 1.20
+    shape_memory_compare_max_points: 300
+
+    # Top-K graph elements used during matching.
+    shape_memory_max_match_nodes: 80
+    shape_memory_max_match_edges: 120
+    shape_memory_max_match_relations: 12
+
+    # Reprepare signal: when memory score stays low for several frames.
+    shape_memory_reprepare_enabled: true
+    shape_memory_reprepare_match_threshold: 0.25
+    shape_memory_reprepare_bad_frames: 5
+
+    # Persistent object memory bank. Unlike active track ShapeMemory,
+    # this survives node restart through YAML save/load.
+    object_memory_bank_enabled: true
+    object_memory_bank_file: "/cx128s2_object_memory_bank.yaml"
+    auto_load_object_memory_bank_on_start: true
+    auto_save_object_memory_bank_after_commit: true
+    object_memory_bank_attach_threshold: 0.45
+
+    # Mirror mode creates virtual mirrored nodes/edges as soft priors.
+    # Virtual geometry is never treated as directly observed point evidence.
+    shape_memory_mirror_mode_enabled: true
+    shape_memory_mirror_plane: "xz"
+    shape_memory_mirror_center_policy: "bbox_center"
+    # Deprecated compatibility parameter. If shape_memory_mirror_plane is empty,
+    # local_x->yz, local_y->xz, local_z->xy conversion is used.
+    shape_memory_mirror_axis: "local_x"
+    shape_memory_mirror_min_observed_width_ratio: 0.35
+    shape_memory_mirror_confidence_scale: 0.55
+    shape_memory_mirror_virtual_node_confidence: 0.45
+    shape_memory_mirror_virtual_edge_confidence: 0.40
+    shape_memory_mirror_min_observed_nodes: 5
+    shape_memory_mirror_only_after_prepare_ready: true
+    shape_memory_mirror_warn_if_near_identical: true
+    shape_memory_mirror_debug_samples: 5
+    shape_memory_mirror_only_for_class_labels: ["TRUCK", "VEHICLE", "TRUCK_LIKE", "VEHICLE_LIKE"]
+
+    # ============================================================
+    # 10. Static structure and risk filters
+    # ============================================================
+    enable_risk_assessment: false
+    enable_static_structure_filter: true
+    static_velocity_threshold: 0.25
+    static_persistence_frames: 5
+    wall_length_min: 4.0
+    wall_width_max: 0.8
+    wall_elongation_ratio_min: 4.0
+
+    # ============================================================
+    # 11. Runtime performance limits
+    # ============================================================
+    max_tracking_candidates: 80
+    max_active_tracks: 100
+
+    # OpenMP parallel preprocessing
+    enable_parallel_processing: true
+    parallel_threads: 4
+
+    # Debug PointCloud2 throttling and point cap.
+    debug_cloud_publish_period_sec: 0.2
+    debug_cloud_max_points: 50000
+
+    # Maximum-performance example:
+    # publish_debug_roi_filtered_points: false
+    # publish_debug_foreground_points: false
+    # publish_debug_clusters: false
+    # debug_cloud_publish_period_sec: 0.5
+    # debug_cloud_max_points: 20000
+    # max_tracking_candidates: 40
+    # max_active_tracks: 60
+
+    # ============================================================
+    # 12. Debug topics and visualization
+    # ============================================================
+    roi_filtered_points_topic: "/debug/roi_filtered_points"
+
+    # PointCloud2 debug streams. Disable expensive streams if GUI/RViz lags.
+    publish_debug_valid_points: false
+    publish_debug_roi_filtered_points: true
+    publish_debug_foreground_points: true
+    publish_debug_clusters: true
+    publish_debug_static_background_points: false
+    publish_debug_transformed_cloud: false
+
+    # Marker debug streams.
+    publish_shape_graph_markers: true
+    publish_shape_memory_markers: true
+    shape_graph_marker_lifetime: 0.5
+    marker_lifetime: 0.5
+
+    # ============================================================
+    # 13. Diagnostics and CSV dumps
+    # ============================================================
+    publish_diagnostics_table: false
+    diagnostics_table_period_sec: 1.0
+    diagnostics_table_topic: "/debug/perception_diagnostics_table"
+    print_diagnostics_table_to_console: true
+
+    background_table_file: "/tmp/cx128s2_background_table.csv"
+    track_table_file: "/tmp/cx128s2_track_table.csv"
+    candidate_table_file: "/tmp/cx128s2_candidate_table.csv"
+    save_csv_on_shutdown: false

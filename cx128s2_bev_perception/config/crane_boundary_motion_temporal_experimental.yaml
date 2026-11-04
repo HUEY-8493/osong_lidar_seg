@@ -1,0 +1,8 @@
+# Opt-in overlay; apply AFTER the existing Crane configuration/overlay.
+# Raw boundary association and XY evidence remain unchanged.
+cx128s2_bev_perception:
+  ros__parameters:
+    crane_slope.work_status.boundary_temporal_enabled: true
+    crane_slope.work_status.boundary_start_confirm_sec: 0.5
+    crane_slope.work_status.boundary_stop_confirm_sec: 1.5
+    crane_slope.work_status.boundary_support_timeout_sec: 2.5

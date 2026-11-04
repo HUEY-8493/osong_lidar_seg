@@ -1,0 +1,12 @@
+roi_policy:
+  version: 1
+  frame_id: world
+  zones:
+  - name: roi_1
+    type: watch
+    shape: box
+    enabled: true
+    x_min: -19.04839650145773
+    x_max: 30.43498542274051
+    y_min: -9.9148688046647
+    y_max: 19.822740524781352

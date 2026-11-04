@@ -1,0 +1,30 @@
+/**:
+  ros__parameters:
+    # Crane V2 R15 + Beam Extent C4 runtime defaults.
+    # World calibration/TF is still selected by lidar_bringup's Crane profile.
+    cargo_length_confirm_sec: 2.0
+    cargo_shrink_hold_sec: 3.0
+    cargo_shrink_ratio: 0.5
+    cargo_shrink_recovery_ratio: 0.8
+    # Coarse movement only. No direction or speed condition in this mode.
+    crane_motion_mode: "scene_histogram"
+    crane_hist_xy_bin_m: 0.5
+    crane_hist_bin_m: 0.10
+    crane_hist_start_score: 0.08
+    crane_hist_stop_score: 0.03
+    crane_hist_lag_sec: 0.4
+    crane_hist_start_confirm_sec: 0.2
+    crane_hist_stop_confirm_sec: 0.8
+    crane_hist_min_points: 1000
+    # Optional body_xy recovery mode; unused by the default histogram mode.
+    crane_xy_enabled: true
+    crane_xy_start_m: 0.04
+    crane_xy_min_speed: 0.03
+    crane_xy_start_confirm_sec: 0.2
+    crane_xy_stop_span_m: 0.015
+    crane_xy_stop_confirm_sec: 0.8
+    crane_xy_min_points: 15
+    # Existing calibrated upper fixed-root world ROIs, NOT the Hook ROIs.
+    # Order: xmin,xmax,ymin,ymax,zmin,zmax.
+    crane_xy_left_root_roi: [-1.25, -0.55, -0.25, 0.35, 4.95, 5.55]
+    crane_xy_right_root_roi: [0.72, 1.42, -0.25, 0.35, 5.00, 5.60]
